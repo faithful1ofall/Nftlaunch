@@ -1,12 +1,12 @@
-import { getContract, readContract } from "thirdweb";
-import { client } from "./client";
-import { sonicTestnet } from "./Customchains";
-import factoryabi from "./factoryabi.json";
-import nftabi from "./nftabi.json";
+//import { getContract, readContract } from "thirdweb";
+//import { client } from "./client";
+//import { sonicTestnet } from "./Customchains";
+//import factoryabi from "./factoryabi.json";
+//import nftabi from "./nftabi.json";
 
 
 // Function to fetch baseURI from a collection contract
-const fetchCollection = async (collectionAddress) => {
+/*const fetchCollection = async (collectionAddress) => {
   try {
     const contract = getContract({
       address: collectionAddress,
@@ -154,4 +154,4 @@ const loadNFTCollections = async (onUpdate) => {
   }
 };
 
-export default loadNFTCollections;
+export default loadNFTCollections;*/
