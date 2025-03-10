@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ContextProvider from "src/utils/ContextProvider";
 import GlobalStyles from "@assets/styles/GlobalStyles";
 import { ThirdwebProvider } from "thirdweb/react";
-import { CosmosKitProvider } from "@/components/cosmos-kit-provider";
+import { CosmosKitProvider } from "src/lib/cosmos-kit-provider";
 
 const App = ({ Component, pageProps }) => {
   const [showChild, setShowChild] = useState(false);
