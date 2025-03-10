@@ -14,7 +14,7 @@
     "@cosmos-kit/keplr": "^2.14.7",
     "@cosmos-kit/react": "^2.21.7",
     "chain-registry": "*",
-    "next": "13.1.6",
+    "next": "14.2.15",
     "next-compose-plugins": "^2.2.1",
     "next-plausible": "^3.7.1",
     "pinata-web3": "^0.5.4",
