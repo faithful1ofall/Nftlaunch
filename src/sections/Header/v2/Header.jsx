@@ -15,9 +15,9 @@ import walletIcon2 from "@assets/images/icons/uniswap.png"
 import walletIcon3 from "@assets/images/icons/market.png"
 import walletIcon4 from "@assets/images/icons/gate.png"
 
-import { ConnectButton, darkTheme, lightTheme, ChainProvider, ChainIcon } from "thirdweb/react";
-import { client, wallets } from "src/lib/client";
-import { sonicTestnet } from "src/lib/Customchains";
+//import { ConnectButton, darkTheme, lightTheme, ChainProvider, ChainIcon } from "thirdweb/react";
+//import { client, wallets } from "src/lib/client";
+//import { sonicTestnet } from "src/lib/Customchains";
 
 const Header = () => {
   const { walletModalHandle } = useModal();
@@ -108,13 +108,13 @@ const Header = () => {
                 </div>
               </div> */}
         
-              <ConnectButton
+              {/*  <ConnectButton
             client={client}
                 chain={sonicTestnet}
                 wallets={wallets}
-          />
+          />*/}
           
-              {/*    <Button
+                  <Button
                 sm
                 variant="white"
                 className="connect_btn"
@@ -122,7 +122,7 @@ const Header = () => {
               >
                 <img src={connectIcon.src} alt="icon" />
                 Connect
-              </Button>*/}
+              </Button>
             </div>
           </div>
         </div>
