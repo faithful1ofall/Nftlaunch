@@ -1,4 +1,4 @@
-import { defineChain } from "thirdweb/chains";
+/*import { defineChain } from "thirdweb/chains";
 
 
 export const sonicTestnet = defineChain({
@@ -9,4 +9,4 @@ name: "Sonic",
 symbol: "S",
 decimals: 18,
 },
-});
+});*/
