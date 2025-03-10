@@ -1,4 +1,4 @@
-import { createThirdwebClient } from "thirdweb";
+/*import { createThirdwebClient } from "thirdweb";
 import { createWallet } from "thirdweb/wallets";
 
 // Replace this with your client ID string
@@ -25,4 +25,4 @@ export const wallets = [
   createWallet("com.binance"),
   createWallet("org.uniswap"),
   createWallet("com.bybit"),
-];
+];*/
