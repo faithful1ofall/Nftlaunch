@@ -4,7 +4,7 @@ import Button from "@components/button";
 import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
 import { generateImage, generateCollectionTheme, generateNFTCollection } from '../../../utils/openaigen';
-import imglyRemoveBackground from "@imgly/background-removal";
+//import imglyRemoveBackground from "@imgly/background-removal";
 /*import { useSendTransaction, useReadContract } from "thirdweb/react";
 import { getContract, prepareContractCall } from "thirdweb";
 import { client } from "src/lib/client";
