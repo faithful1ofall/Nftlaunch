@@ -2,14 +2,14 @@ import { useState } from "react";
 import Link from "next/link";
 import CardHover from "@components/cardHover";
 import ProjectCardStyleWrapper from "./ProjectCard.style";
-import { getContract, prepareContractCall } from "thirdweb";
+/*import { getContract, prepareContractCall } from "thirdweb";
 import { client } from "src/lib/client";
 import { sonicTestnet } from "src/lib/Customchains";
 import nftabi from "src/lib/nftabi.json";
 import Button from "@components/button";
 
 import { useSendTransaction, useReadContract } from "thirdweb/react";
-
+*/
 const ProjectCard = ({
   thumb,
   title,
@@ -22,7 +22,7 @@ const ProjectCard = ({
 }) => {
   const [loading, setLoading] = useState(false);
 
-  const contract = getContract({
+/*  const contract = getContract({
 address: address,
 chain: sonicTestnet,
 abi: nftabi,
@@ -41,14 +41,14 @@ method: "basePrice"
 
 
   const { mutate: sendTx, data: transactionResult } =
-useSendTransaction();
+useSendTransaction();*/
 
 
 
 const mintnft = () => {
   setLoading(true); 
 
-  const transaction = prepareContractCall({
+ /* const transaction = prepareContractCall({
     contract,
     method: "mint",
     params: [data + BigInt(1)],
@@ -64,7 +64,7 @@ const mintnft = () => {
       alert(`Transaction failed: ${error.message}`);
       setLoading(false); // Stop loading on error
     },
-  });
+  });*/
 };
 
   
