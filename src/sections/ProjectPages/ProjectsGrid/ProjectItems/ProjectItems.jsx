@@ -16,7 +16,7 @@ const ProjectItems = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
 
-  useEffect(() => {
+/*  useEffect(() => {
     const fetchData = async () => {
        loadNFTCollections((updatedData) => {
   console.log("Live update:", updatedData);
@@ -26,7 +26,7 @@ const ProjectItems = () => {
     };
 
     fetchData();
-  }, []);
+  }, []);*/
   return (
     <ProjectItemsStyleWrapper>
       <div className="container">
