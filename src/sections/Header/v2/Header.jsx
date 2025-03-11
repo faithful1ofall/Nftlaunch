@@ -15,13 +15,20 @@ import walletIcon2 from "@assets/images/icons/uniswap.png"
 import walletIcon3 from "@assets/images/icons/market.png"
 import walletIcon4 from "@assets/images/icons/gate.png"
 
-import { ConnectWallet } from "src/lib/connect-wallet";
+//import { ConnectWallet } from "src/lib/connect-wallet";
+import { useChain } from "@cosmos-kit/react";
 
+
+  
 //import { ConnectButton, darkTheme, lightTheme, ChainProvider, ChainIcon } from "thirdweb/react";
 //import { client, wallets } from "src/lib/client";
 //import { sonicTestnet } from "src/lib/Customchains";
 
 const Header = () => {
+  
+  const { connect } =
+    useChain("injectivetestnet");
+  
   const { walletModalHandle } = useModal();
   const [isMobileMenu, setMobileMenu] = useState(false);
 
@@ -115,13 +122,13 @@ const Header = () => {
                 chain={sonicTestnet}
                 wallets={wallets}
           />*/}
-              <ConnectWallet />
+
           
                   <Button
                 sm
                 variant="white"
                 className="connect_btn"
-                onClick={(e) => handleWalletBtn(e)}
+                onClick={() => connect()}
               >
                 <img src={connectIcon.src} alt="icon" />
                 Connect
