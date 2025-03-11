@@ -4,13 +4,6 @@ import Button from "@components/button";
 import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
 import { generateImage, generateCollectionTheme, generateNFTCollection } from '../../../utils/openaigen';
-//import imglyRemoveBackground from "@imgly/background-removal";
-/*import { useSendTransaction, useReadContract } from "thirdweb/react";
-import { getContract, prepareContractCall } from "thirdweb";
-import { client } from "src/lib/client";
-import { sonicTestnet } from "src/lib/Customchains";
-import factoryabi from "src/lib/factoryabi.json";
-*/
 
 import { SigningStargateClient, coins } from "@cosmjs/stargate";
 import { useChain } from "@cosmos-kit/react";
@@ -45,20 +38,6 @@ const ApplyForm = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [step, setStep] = useState(1);
 
-/*  const contract = getContract({
-  address: process.env.NEXT_PUBLIC_FACTORY,
-  chain: sonicTestnet,
-  abi: factoryabi,
-  client,
-});
-
-const { data, isLoading } = useReadContract({
-contract,
-method: "creationFee"
-});
-
-const { mutate: sendTx, data: transactionResult } =
-useSendTransaction();*/
 
 
   const onSubmit = () => {
@@ -143,24 +122,6 @@ useSendTransaction();*/
       console.error("Execution failed:", error);
       alert("Transaction failed!");
     }
-
- /* const transaction = prepareContractCall({
-    contract,
-    method: "createCollection",
-    params: [name, link, BigInt(nftprice), count, 10],
-    value: data,
-  });
-
-  sendTx(transaction, {
-    onSuccess: () => {
-      alert("Transaction sent successfully!");
-      setLoading(false); // Stop loading on success
-    },
-    onError: (error) => {
-      alert(`Transaction failed: ${error.message}`);
-      setLoading(false); // Stop loading on error
-    },
-  });*/
 };
 
   const handleGenerateTheme = async () => {
