@@ -8,9 +8,6 @@ export function ConnectWallet() {
 
   return (
     <div className="flex flex-col gap-5 p-5">
-      <div>Status: {status}</div>
-      <div>Username: {username}</div>
-      <div>Address: {address}</div>
       <button
         className="bg-slate-200 hover:bg-purple-400 max-w-80"
         onClick={() => {
@@ -19,14 +16,14 @@ export function ConnectWallet() {
       >
         Connect
       </button>
-      <button
+  {/* <button
         className="bg-slate-200 hover:bg-purple-400 max-w-80"
         onClick={() => {
           disconnect();
         }}
       >
         Disconnect
-      </button>
+      </button>*/}
     </div>
   );
 }
