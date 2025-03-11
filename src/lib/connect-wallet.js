@@ -4,7 +4,7 @@ import { useChain } from "@cosmos-kit/react";
 
 export function ConnectWallet() {
   const { address, status, username, connect, disconnect } =
-    useChain("cosmoshub");
+    useChain("injectivetestnet");
 
   return (
     <div className="flex flex-col gap-5 p-5">
