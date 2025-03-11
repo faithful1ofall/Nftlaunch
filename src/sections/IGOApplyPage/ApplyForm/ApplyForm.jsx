@@ -12,6 +12,13 @@ import { sonicTestnet } from "src/lib/Customchains";
 import factoryabi from "src/lib/factoryabi.json";
 */
 
+import { SigningStargateClient, coins } from "@cosmjs/stargate";
+import { useChain } from "@cosmos-kit/react";
+
+
+
+const { getSigningStargateClient, address } = useChain("injectivetestnet");
+
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATAJWT,
   pinataGateway: process.env.NEXT_PUBLIC_PINATAGATEWAY || "example-gateway.mypinata.cloud",
@@ -100,6 +107,42 @@ useSendTransaction();*/
     alert("Error fetching Blockchain, try connecting/refreshing");
     return setLoading(false);
   }
+
+    try {
+      const client = await getSigningStargateClient();
+      const contractAddress = "inj1yourcontractaddress..."; // Replace with your deployed contract address
+
+      const msg = {
+        increment: {}, // Calls the `Increment {}` function in the smart contract
+      };
+
+      const fee = {
+        amount: coins(5000, "inj"), // Fee for executing the contract
+        gas: "200000",
+      };
+
+      const result = await client.signAndBroadcast(
+        address,
+        [
+          {
+            typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
+            value: {
+              sender: address,
+              contract: contractAddress,
+              msg: JSON.stringify(msg),
+              funds: [], // If sending tokens, add them here
+            },
+          },
+        ],
+        fee
+      );
+
+      console.log("Transaction successful:", result);
+      alert("Smart contract executed successfully!");
+    } catch (error) {
+      console.error("Execution failed:", error);
+      alert("Transaction failed!");
+    }
 
  /* const transaction = prepareContractCall({
     contract,
