@@ -132,8 +132,8 @@ const ApplyForm = () => {
     recentWallet,
   });
   
-   const  feeest = response.fee?.amount[0],
-   const  gasLimit = response.fee?.gas,
+   const  feeest = response.fee?.amount[0];
+   const  gasLimit = response.fee?.gas;
 
 
       const result = await broadcast({
