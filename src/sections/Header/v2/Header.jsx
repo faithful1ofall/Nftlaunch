@@ -15,23 +15,23 @@ import walletIcon2 from "@assets/images/icons/uniswap.png"
 import walletIcon3 from "@assets/images/icons/market.png"
 import walletIcon4 from "@assets/images/icons/gate.png"
 
-//import { ConnectWallet } from "src/lib/connect-wallet";
-//import { useChain } from "@cosmos-kit/react";
 
-//import { useShuttle } from "@delphi-labs/shuttle";
-  import { useShuttle } from "@delphi-labs/shuttle-react";
-//import { ConnectButton, darkTheme, lightTheme, ChainProvider, ChainIcon } from "thirdweb/react";
-//import { client, wallets } from "src/lib/client";
-//import { sonicTestnet } from "src/lib/Customchains";
+import { useShuttle } from "@delphi-labs/shuttle-react";
 
 const Header = () => {
+  const [wallet, setWallet] = useState(null);
   
-  const { connect, extensionProviders } = useShuttle();
+  const { connect, extensionProviders, getWallets } = useShuttle();
 
+  
   console.log('extensionProviders', extensionProviders);
 
-  const onConnect = () => {
-    connect({ extensionProviderId: "keplr", chainId: "injective-888" });
+  const onConnect = async () => {
+    await connect({ extensionProviderId: "keplr", chainId: "injective-888" });
+    const wallet = getWallets({ chainId: 'injective-888' })[0];
+     
+    console.log('wallet', wallet);
+    
   };
   
   const { walletModalHandle } = useModal();
