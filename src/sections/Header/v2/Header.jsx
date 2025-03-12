@@ -18,16 +18,15 @@ import walletIcon4 from "@assets/images/icons/gate.png"
 //import { ConnectWallet } from "src/lib/connect-wallet";
 //import { useChain } from "@cosmos-kit/react";
 
-import { useShuttle } from "@delphi-labs/shuttle";
-  
+//import { useShuttle } from "@delphi-labs/shuttle";
+  import { useShuttle } from "@delphi-labs/shuttle-react";
 //import { ConnectButton, darkTheme, lightTheme, ChainProvider, ChainIcon } from "thirdweb/react";
 //import { client, wallets } from "src/lib/client";
 //import { sonicTestnet } from "src/lib/Customchains";
 
 const Header = () => {
   
-  const { connect, providers } =
-    useShuttle();
+  const { connect } = useShuttle();
 
   const onConnect = () => {
     connect({ providerId: "keplr", chainId: "injective-888" });
