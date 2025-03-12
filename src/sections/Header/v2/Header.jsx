@@ -28,6 +28,10 @@ const Header = () => {
   
   const { connect, providers } =
     useShuttle();
+
+  const onConnect = () => {
+    connect({ providerId: "keplr", chainId: "injective-888" });
+  };
   
   const { walletModalHandle } = useModal();
   const [isMobileMenu, setMobileMenu] = useState(false);
@@ -123,29 +127,14 @@ const Header = () => {
                 wallets={wallets}
           />*/}
 
-              {providers.map((provider) => {
-        return (
-          <button
-            key={provider.id}
-            onClick={() =>
-              connect({
-                providerId: provider.id,
-                chainId: "injective-888",
-              })
-            }
-            disabled={!provider.initialized}
-          >
-            {provider.name}
-          </button>
-        );
-      })}
+            
 
           
                   <Button
                 sm
                 variant="white"
                 className="connect_btn"
-                onClick={() => connect()}
+                onClick={() => onConnect()}
               >
                 <img src={connectIcon.src} alt="icon" />
                      {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "Connect"}
