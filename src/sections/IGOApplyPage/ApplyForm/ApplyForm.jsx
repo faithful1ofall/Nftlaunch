@@ -79,10 +79,10 @@ const { getSigningStargateClient, address } = useChain("injectivetestnet");
     return setLoading(false);
   }
 
-  if (!data) {
+/*  if (!data) {
     alert("Error fetching Blockchain, try connecting/refreshing");
     return setLoading(false);
-  }
+  }*/
 
     try {
       const client = await getSigningStargateClient();
