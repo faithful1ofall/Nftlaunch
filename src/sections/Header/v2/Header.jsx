@@ -16,9 +16,9 @@ import walletIcon3 from "@assets/images/icons/market.png"
 import walletIcon4 from "@assets/images/icons/gate.png"
 
 //import { ConnectWallet } from "src/lib/connect-wallet";
-import { useChain } from "@cosmos-kit/react";
+//import { useChain } from "@cosmos-kit/react";
 
-
+import { useShuttle } from "@delphi-labs/shuttle";
   
 //import { ConnectButton, darkTheme, lightTheme, ChainProvider, ChainIcon } from "thirdweb/react";
 //import { client, wallets } from "src/lib/client";
@@ -26,8 +26,8 @@ import { useChain } from "@cosmos-kit/react";
 
 const Header = () => {
   
-  const { connect, address } =
-    useChain("injectivetestnet");
+  const { connect, providers } =
+    useShuttle();
   
   const { walletModalHandle } = useModal();
   const [isMobileMenu, setMobileMenu] = useState(false);
@@ -122,6 +122,23 @@ const Header = () => {
                 chain={sonicTestnet}
                 wallets={wallets}
           />*/}
+
+              {providers.map((provider) => {
+        return (
+          <button
+            key={provider.id}
+            onClick={() =>
+              connect({
+                providerId: provider.id,
+                chainId: "injective-888",
+              })
+            }
+            disabled={!provider.initialized}
+          >
+            {provider.name}
+          </button>
+        );
+      })}
 
           
                   <Button
