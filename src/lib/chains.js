@@ -1,11 +1,11 @@
-import { fromInjectiveEthereumChainToCosmosChain, Network } from "@delphi-labs/shuttle-react";
+//import { fromInjectiveEthereumChainToCosmosChain, Network } from "@delphi-labs/shuttle-react";
 /*import { bech32 } from "bech32";
 import { Address } from "ethereumjs-util";
 
 import { ChainGrpcBankApi, ChainGrpcWasmApi, IndexerGrpcOracleApi } from "@injectivelabs/sdk-ts";
 import { Network as InjectiveNetworks, getNetworkEndpoints } from "@injectivelabs/networks";
 */
-export const INJECTIVE_TESTNET: Network = {
+export const INJECTIVE_TESTNET = {
   name: "Injective Testnet",
   chainId: "injective-888",
   chainPrefix: "inj",
@@ -30,7 +30,7 @@ export const INJECTIVE_TESTNET: Network = {
   },
 };
 
-export const INJECTIVE_MAINNET: Network = {
+export const INJECTIVE_MAINNET = {
   name: "Injective Mainnet",
   chainId: "injective-1",
   chainPrefix: "inj",
