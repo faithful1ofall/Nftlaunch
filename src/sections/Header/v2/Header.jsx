@@ -29,7 +29,7 @@ const Header = () => {
   const onConnect = async () => {
     await connect({ extensionProviderId: "keplr", chainId: "injective-888" });
     const wallet = getWallets({ chainId: 'injective-888' })[0];
-     
+     setWallet(wallet);
     console.log('wallet', wallet);
     
   };
@@ -140,8 +140,8 @@ const Header = () => {
                 onClick={() => onConnect()}
               >
                 <img src={connectIcon.src} alt="icon" />
-                    {/*   {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "Connect"}*/}
-                    Connect
+                      {wallet ? `${wallet.account.address.slice(0, 6)}...${wallet.account.address.slice(-4)}` : "Connect"}
+                    
               </Button>
             </div>
           </div>
