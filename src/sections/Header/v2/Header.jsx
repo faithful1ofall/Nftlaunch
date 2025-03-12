@@ -26,7 +26,7 @@ import { useChain } from "@cosmos-kit/react";
 
 const Header = () => {
   
-  const { connect } =
+  const { connect, address } =
     useChain("injectivetestnet");
   
   const { walletModalHandle } = useModal();
@@ -131,7 +131,7 @@ const Header = () => {
                 onClick={() => connect()}
               >
                 <img src={connectIcon.src} alt="icon" />
-                Connect
+                     {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "Connect"}
               </Button>
             </div>
           </div>
