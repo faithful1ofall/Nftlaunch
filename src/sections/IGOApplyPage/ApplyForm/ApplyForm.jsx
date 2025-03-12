@@ -40,7 +40,7 @@ const ApplyForm = () => {
 
 
 
-  const onSubmit = () => {
+  const onSubmit = async() => {
   setLoading(true);
 
   const collectionName = document.getElementById("CollectionName")?.value.trim();
