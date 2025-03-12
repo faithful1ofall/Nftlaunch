@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ContextProvider from "src/utils/ContextProvider";
 import GlobalStyles from "@assets/styles/GlobalStyles";
 import { CosmosKitProvider } from "src/lib/cosmos-kit-provider";
-import { ShuttleProvider } from "@delphi-labs/shuttle-react"
+import { KeplrExtensionProvider, MetamaskExtensionProvider, ShuttleProvider } from "@delphi-labs/shuttle-react"
 import { INJECTIVE_MAINNET,  INJECTIVE_TESTNET } from 'src/lib/chains';
 
 import { wallets } from "@cosmos-kit/keplr";
