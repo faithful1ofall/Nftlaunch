@@ -137,7 +137,8 @@ const Header = () => {
                 onClick={() => onConnect()}
               >
                 <img src={connectIcon.src} alt="icon" />
-                     {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "Connect"}
+                    {/*   {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "Connect"}*/}
+                    Connect
               </Button>
             </div>
           </div>
