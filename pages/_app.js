@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import ContextProvider from "src/utils/ContextProvider";
 import GlobalStyles from "@assets/styles/GlobalStyles";
-import { CosmosKitProvider } from "src/lib/cosmos-kit-provider";
+//import { CosmosKitProvider } from "src/lib/cosmos-kit-provider";
 import { KeplrExtensionProvider, MetamaskExtensionProvider, KeplrMobileProvider, MetamaskMobileProvider, ShuttleProvider } from "@delphi-labs/shuttle-react"
 import { INJECTIVE_MAINNET,  INJECTIVE_TESTNET } from 'src/lib/chains';
 
-import { wallets } from "@cosmos-kit/keplr";
+//import { wallets } from "@cosmos-kit/keplr";
 //import { wallets } from 'cosmos-kit';
 
 const App = ({ Component, pageProps }) => {
