@@ -89,7 +89,7 @@ const ApplyForm = () => {
      // const client = await getSigningStargateClient();
       const contractAddress = "inj16dt7a3z6c34drjmnw4j8lyht7wdy2hxhxvnm9k"; // Replace with your deployed contract address
 
-      let config = {
+      const config = {
                 name: collectionName,
                 symbol: 'MLNFT',
                 minter: recentWallet.account.address,
@@ -112,10 +112,12 @@ const ApplyForm = () => {
     funds: [
       {
         denom: 'inj',
-        amount: "100000000000",
+        amount: "1000000000000000000",
       }
     ]
   });
+
+      console.log('msg', [msg]);
 
      /* const fee = {
         amount: coins(5000, "inj"), // Fee for executing the contract
