@@ -26,7 +26,7 @@ import walletIcon4 from "@assets/images/icons/gate.png"
 
 const Header = () => {
   
-  const { connect } = useShuttle();
+  const { connect, providers } = useShuttle();
 
   const onConnect = () => {
     connect({ providerId: "keplr", chainId: "injective-888" });
@@ -126,7 +126,21 @@ const Header = () => {
                 wallets={wallets}
           />*/}
 
-            
+            {providers.map((provider) => {
+        return (
+          <button
+            key={provider.id}
+            onClick={() =>
+              connect({
+                providerId: provider.id,
+                chainId: "mars-1",
+              })
+            }
+            disabled={!provider.initialized}
+          >
+            {provider.name}
+          </button>
+        );
 
           
                   <Button
