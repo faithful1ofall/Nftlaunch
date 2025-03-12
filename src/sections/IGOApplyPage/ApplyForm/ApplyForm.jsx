@@ -86,7 +86,7 @@ const ApplyForm = () => {
   }*/
 
     try {
-      const client = await getSigningStargateClient();
+     // const client = await getSigningStargateClient();
       const contractAddress = "inj1yourcontractaddress..."; // Replace with your deployed contract address
 
       let config = {
@@ -142,7 +142,7 @@ const ApplyForm = () => {
                 feeAmount: feeest?.amount,
                 gasLimit: gasLimit,
             });
-      console.log('result', result);
+   //   console.log('result', result);
      /* const result = await client.signAndBroadcast(
         address,
         [
