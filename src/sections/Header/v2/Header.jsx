@@ -24,17 +24,13 @@ const Header = () => {
   const { connect, extensionProviders, recentWallet } = useShuttle();
 
   useEffect(() => {
-    const checkWalletConnection = async () => {
-      if (recentWallet) {
-        setWallet(recentWallet);
-        console.log("Already connected wallet:", existingWallet);
-      }
-    };
-
-    checkWalletConnection();
-  }, []);
+    if (recentWallet) {
+      setWallet(recentWallet);
+      console.log("Already connected wallet:", recentWallet);
+    }
+  }, [recentWallet]);
   
-  console.log('extensionProviders', extensionProviders);
+//  console.log('extensionProviders', extensionProviders);
 
   const onConnect = async () => {
     await connect({ extensionProviderId: "keplr", chainId: "injective-888" });
