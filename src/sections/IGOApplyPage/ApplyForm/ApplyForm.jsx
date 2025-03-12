@@ -117,10 +117,10 @@ const ApplyForm = () => {
     ]
   });
 
-      const fee = {
+     /* const fee = {
         amount: coins(5000, "inj"), // Fee for executing the contract
         gas: "200000",
-      };
+      };*/
 
       const amount = {
         denom: "inj",
