@@ -16,6 +16,7 @@
     "cosmos-kit": "2.23.4",
     "@cosmjs/stargate": "0.32.3",
     "@delphi-labs/shuttle": "^4.1.0",
+    "@delphi-labs/shuttle-react": "^3.3.0",
     "chain-registry": "^1.69.32",
     "next": "^13",
     "@interchain-ui/react": "1.23.22",
