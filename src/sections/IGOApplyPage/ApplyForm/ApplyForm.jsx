@@ -127,8 +127,10 @@ const ApplyForm = () => {
         amount: "1000000000000000000", // 1 INJ
       };
 
+      const msgs = [msg];
+
       const response = await simulate({
-    [msg],
+    msgs,
     recentWallet,
   });
    console.log('response for simulate', response);
@@ -138,7 +140,7 @@ const ApplyForm = () => {
 
       const result = await broadcast({
                 recentWallet,
-                messages: [msg],
+                messages: msgs,
                 feeAmount: feeest?.amount,
                 gasLimit: gasLimit,
             });
