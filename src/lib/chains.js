@@ -26,8 +26,8 @@ export const INJECTIVE_TESTNET = {
     },
     fromEthChainToCosmosChain: (chainId: number): string => {
       return fromInjectiveEthereumChainToCosmosChain(chainId);
-    },*/
-  },
+    },
+  },*/
 };
 
 export const INJECTIVE_MAINNET = {
@@ -51,8 +51,8 @@ export const INJECTIVE_MAINNET = {
     },
     fromEthChainToCosmosChain: (chainId: number): string => {
       return fromInjectiveEthereumChainToCosmosChain(chainId);
-    },*/
-  },
+    },
+  },*/
 };
 
 export const networks = [
