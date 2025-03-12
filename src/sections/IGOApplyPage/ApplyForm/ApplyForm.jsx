@@ -10,7 +10,6 @@ import { useChain } from "@cosmos-kit/react";
 
 
 
-const { getSigningStargateClient, address } = useChain("injectivetestnet");
 
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATAJWT,
@@ -38,7 +37,7 @@ const ApplyForm = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [step, setStep] = useState(1);
 
-
+const { getSigningStargateClient, address } = useChain("injectivetestnet");
 
   const onSubmit = async() => {
   setLoading(true);
