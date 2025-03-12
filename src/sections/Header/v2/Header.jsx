@@ -21,16 +21,26 @@ import { useShuttle } from "@delphi-labs/shuttle-react";
 const Header = () => {
   const [wallet, setWallet] = useState(null);
   
-  const { connect, extensionProviders, getWallets } = useShuttle();
+  const { connect, extensionProviders, recentWallet } = useShuttle();
 
+  useEffect(() => {
+    const checkWalletConnection = async () => {
+      if (recentWallet) {
+        setWallet(recentWallet);
+        console.log("Already connected wallet:", existingWallet);
+      }
+    };
+
+    checkWalletConnection();
+  }, []);
   
   console.log('extensionProviders', extensionProviders);
 
   const onConnect = async () => {
     await connect({ extensionProviderId: "keplr", chainId: "injective-888" });
-    const wallet = getWallets({ chainId: 'injective-888' })[0];
-     setWallet(wallet);
-    console.log('wallet', wallet);
+  //  const wallet = getWallets({ chainId: 'injective-888' })[0];
+     setWallet(recentWallet);
+    console.log('recentWallet', recentWallet);
     
   };
   
