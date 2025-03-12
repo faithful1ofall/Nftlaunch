@@ -87,13 +87,13 @@ const ApplyForm = () => {
 
     try {
      // const client = await getSigningStargateClient();
-      const contractAddress = "inj1yourcontractaddress..."; // Replace with your deployed contract address
+      const contractAddress = "inj16dt7a3z6c34drjmnw4j8lyht7wdy2hxhxvnm9k; // Replace with your deployed contract address
 
       let config = {
                 name: collectionName,
                 symbol: 'MLNFT',
                 minter: recentWallet.account.address,
-                code_id: 13004,
+                code_id: 23437,
                 logo_url: 'https://nftlaunch.vercel.app/_next/static/media/logo.5129e1d1.png',
       }
 
