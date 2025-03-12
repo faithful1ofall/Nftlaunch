@@ -9,8 +9,6 @@ import { SigningStargateClient, coins } from "@cosmjs/stargate";
 import { useChain } from "@cosmos-kit/react";
 
 
-
-
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATAJWT,
   pinataGateway: process.env.NEXT_PUBLIC_PINATAGATEWAY || "example-gateway.mypinata.cloud",
@@ -117,9 +115,11 @@ const { getSigningStargateClient, address } = useChain("injectivetestnet");
 
       console.log("Transaction successful:", result);
       alert("Smart contract executed successfully!");
+      setLoading(false);
     } catch (error) {
       console.error("Execution failed:", error);
       alert("Transaction failed!");
+      setLoading(false);
     }
 };
 
