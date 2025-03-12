@@ -28,6 +28,8 @@ const Header = () => {
   
   const { connect, providers } = useShuttle();
 
+  console.log('providers', providers);
+
   const onConnect = () => {
     connect({ providerId: "keplr", chainId: "injective-888" });
   };
@@ -126,21 +128,9 @@ const Header = () => {
                 wallets={wallets}
           />*/}
 
-            {providers.map((provider) => {
-        return (
-          <button
-            key={provider.id}
-            onClick={() =>
-              connect({
-                providerId: provider.id,
-                chainId: "mars-1",
-              })
-            }
-            disabled={!provider.initialized}
-          >
-            {provider.name}
-          </button>
-        );
+        
+          
+      
 
           
                   <Button
