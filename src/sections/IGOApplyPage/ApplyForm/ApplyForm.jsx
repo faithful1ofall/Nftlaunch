@@ -5,9 +5,9 @@ import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
 import { generateImage, generateCollectionTheme, generateNFTCollection } from '../../../utils/openaigen';
 
-import { SigningStargateClient, coins } from "@cosmjs/stargate";
-import { useChain } from "@cosmos-kit/react";
-
+//import { SigningStargateClient, coins } from "@cosmjs/stargate";
+//import { useChain } from "@cosmos-kit/react";
+import { useShuttle, MsgExecuteContract } from "@delphi-labs/shuttle-react";
 
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATAJWT,
@@ -35,7 +35,8 @@ const ApplyForm = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [step, setStep] = useState(1);
 
-const { getSigningStargateClient, address } = useChain("injectivetestnet");
+//const { getSigningStargateClient, address } = useChain("injectivetestnet");
+  const { recentWallet, broadcast, simulate } = useShuttle();
 
   const onSubmit = async() => {
   setLoading(true);
@@ -88,9 +89,33 @@ const { getSigningStargateClient, address } = useChain("injectivetestnet");
       const client = await getSigningStargateClient();
       const contractAddress = "inj1yourcontractaddress..."; // Replace with your deployed contract address
 
-      const msg = {
-        increment: {}, // Calls the `Increment {}` function in the smart contract
-      };
+      let config = {
+                name: collectionName,
+                symbol: 'MLNFT',
+                minter: recentWallet.account.address,
+                code_id: 13004,
+                logo_url: 'https://nftlaunch.vercel.app/_next/static/media/logo.5129e1d1.png',
+      }
+
+      const msg = new MsgExecuteContract({
+    sender: recentWallet.account.address,
+    contract: contractAddress,
+    msg: {
+      create_contract: {
+        code_id: config.code_id,
+        logo_url: config.logo_url,
+        minter: config.minter,
+        name: config.name,
+        symbol: config.symbol
+      }
+    },
+    funds: [
+      {
+        denom: 'inj',
+        amount: "100000000000",
+      }
+    ]
+  });
 
       const fee = {
         amount: coins(5000, "inj"), // Fee for executing the contract
@@ -102,8 +127,22 @@ const { getSigningStargateClient, address } = useChain("injectivetestnet");
         amount: "1000000000000000000", // 1 INJ
       };
 
-      const result = await client.sendTokens(address, address, [amount], fee, "");
+      const response = await simulate({
+    msg,
+    recentWallet,
+  });
+  
+   const  feeest = response.fee?.amount[0],
+   const  gasLimit = response.fee?.gas,
 
+
+      const result = await broadcast({
+                recentWallet,
+                messages: msg,
+                feeAmount: feeest?.amount,
+                gasLimit: gasLimit,
+            });
+      console.log('result', result);
      /* const result = await client.signAndBroadcast(
         address,
         [
