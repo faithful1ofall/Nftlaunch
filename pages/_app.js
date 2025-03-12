@@ -42,7 +42,7 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <ShuttleProvider
-      providers={extensionProviders}
+      extensionProviders={extensionProviders}
       mobileProviders={mobileProviders}
       persistent
       >
