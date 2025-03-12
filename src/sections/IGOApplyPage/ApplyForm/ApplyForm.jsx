@@ -87,7 +87,7 @@ const ApplyForm = () => {
 
     try {
      // const client = await getSigningStargateClient();
-      const contractAddress = "inj16dt7a3z6c34drjmnw4j8lyht7wdy2hxhxvnm9k; // Replace with your deployed contract address
+      const contractAddress = "inj16dt7a3z6c34drjmnw4j8lyht7wdy2hxhxvnm9k"; // Replace with your deployed contract address
 
       let config = {
                 name: collectionName,
