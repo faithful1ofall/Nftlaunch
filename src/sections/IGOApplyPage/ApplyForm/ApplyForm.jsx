@@ -128,17 +128,17 @@ const ApplyForm = () => {
       };
 
       const response = await simulate({
-    msg,
+    msg.msg,
     recentWallet,
   });
-  
+   console.log('response for simulate', response);
    const  feeest = response.fee?.amount[0];
    const  gasLimit = response.fee?.gas;
 
 
       const result = await broadcast({
                 recentWallet,
-                messages: msg,
+                messages: msg.msg,
                 feeAmount: feeest?.amount,
                 gasLimit: gasLimit,
             });
