@@ -97,7 +97,14 @@ const { getSigningStargateClient, address } = useChain("injectivetestnet");
         gas: "200000",
       };
 
-      const result = await client.signAndBroadcast(
+      const amount = {
+        denom: "inj",
+        amount: "1000000000000000000", // 1 INJ
+      };
+
+      const result = await client.sendTokens(address, address, [amount], fee, "");
+
+     /* const result = await client.signAndBroadcast(
         address,
         [
           {
@@ -111,7 +118,7 @@ const { getSigningStargateClient, address } = useChain("injectivetestnet");
           },
         ],
         fee
-      );
+      );*/
 
       console.log("Transaction successful:", result);
       alert("Smart contract executed successfully!");
