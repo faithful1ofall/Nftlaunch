@@ -26,12 +26,12 @@ import walletIcon4 from "@assets/images/icons/gate.png"
 
 const Header = () => {
   
-  const { connect, providers } = useShuttle();
+  const { connect, extensionProviders } = useShuttle();
 
-  console.log('providers', providers);
+  console.log('extensionProviders', extensionProviders);
 
   const onConnect = () => {
-    connect({ providerId: "keplr", chainId: "injective-888" });
+    connect({ extensionProviderId: "keplr", chainId: "injective-888" });
   };
   
   const { walletModalHandle } = useModal();
