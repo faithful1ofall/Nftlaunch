@@ -5,8 +5,6 @@ import ApplyFormStyleWrapper from "./ApplyFrom.style";
 import { PinataSDK } from "pinata-web3";
 import { generateImage, generateCollectionTheme, generateNFTCollection } from '../../../utils/openaigen';
 
-//import { SigningStargateClient, coins } from "@cosmjs/stargate";
-//import { useChain } from "@cosmos-kit/react";
 import { useShuttle, MsgExecuteContract } from "@delphi-labs/shuttle-react";
 
 const pinata = new PinataSDK({
@@ -35,7 +33,6 @@ const ApplyForm = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [step, setStep] = useState(1);
 
-//const { getSigningStargateClient, address } = useChain("injectivetestnet");
   const { recentWallet, broadcast, simulate } = useShuttle();
 
   const onSubmit = async() => {
@@ -80,13 +77,8 @@ const ApplyForm = () => {
     return setLoading(false);
   }
 
-/*  if (!data) {
-    alert("Error fetching Blockchain, try connecting/refreshing");
-    return setLoading(false);
-  }*/
 
     try {
-     // const client = await getSigningStargateClient();
       const contractAddress = "inj16dt7a3z6c34drjmnw4j8lyht7wdy2hxhxvnm9k"; // Replace with your deployed contract address
 
       const config = {
@@ -119,10 +111,6 @@ const ApplyForm = () => {
 
       console.log('msg', [msg]);
 
-     /* const fee = {
-        amount: coins(5000, "inj"), // Fee for executing the contract
-        gas: "200000",
-      };*/
 
       const amount = {
         denom: "inj",
@@ -146,22 +134,6 @@ const ApplyForm = () => {
                 feeAmount: feeest?.amount,
                 gasLimit: gasLimit,
             });
-   //   console.log('result', result);
-     /* const result = await client.signAndBroadcast(
-        address,
-        [
-          {
-            typeUrl: "/cosmwasm.wasm.v1.MsgExecuteContract",
-            value: {
-              sender: address,
-              contract: contractAddress,
-              msg: JSON.stringify(msg),
-              funds: [], // If sending tokens, add them here
-            },
-          },
-        ],
-        fee
-      );*/
 
       console.log("Transaction successful:", result);
       alert("Smart contract executed successfully!");
