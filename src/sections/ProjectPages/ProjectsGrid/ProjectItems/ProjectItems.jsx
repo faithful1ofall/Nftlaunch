@@ -10,23 +10,25 @@ import coinIcon2 from "@assets/images/project/previous-image2.png"
 import coinIcon3 from "@assets/images/project/previous-image3.png"
 import coinIcon4 from "@assets/images/project/chain.png"
 
-import loadNFTCollections from "../../../../lib/CollectionData";
+import fetchAllCollections from "../../../../lib/CollectionData";
 
 const ProjectItems = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
 
-/*  useEffect(() => {
+ useEffect(() => {
     const fetchData = async () => {
-       loadNFTCollections((updatedData) => {
+    //   loadNFTCollections((updatedData) => {
+    const updatedData =  await fetchAllCollections();
   console.log("Live update:", updatedData);
-          setData(updatedData.data);
-         setLoading(false);
-});
+     //     setData(updatedData.data);
+    //     setLoading(false);
+/});
     };
 
     fetchData();
-  }, []);*/
+  }, []);
+  
   return (
     <ProjectItemsStyleWrapper>
       <div className="container">
