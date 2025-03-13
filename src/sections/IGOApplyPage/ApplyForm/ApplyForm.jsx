@@ -79,14 +79,14 @@ const ApplyForm = () => {
 
 
     try {
-      const contractAddress = "inj16dt7a3z6c34drjmnw4j8lyht7wdy2hxhxvnm9k"; // Replace with your deployed contract address
+      const contractAddress = process.env.NEXT_PUBLIC_FACTORY; // Replace with your deployed contract address
 
       const config = {
-                name: collectionName,
+                name: name,
                 symbol: 'MLNFT',
                 minter: recentWallet.account.address,
-                code_id: 23437,
-                logo_url: 'https://nftlaunch.vercel.app/_next/static/media/logo.5129e1d1.png',
+                code_id: process.env.NEXT_PUBLIC_CODEID,
+                logo_url: link,
       }
 
       const msg = new MsgExecuteContract({
@@ -112,10 +112,10 @@ const ApplyForm = () => {
       console.log('msg', [msg]);
 
 
-      const amount = {
+   /*   const amount = {
         denom: "inj",
         amount: "1000000000000000000", // 1 INJ
-      };
+      };*/
 
       const msgs = [msg];
 
