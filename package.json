@@ -19,6 +19,7 @@
     "@delphi-labs/shuttle-react": "^3.3.0",
     "chain-registry": "^1.69.32",
     "next": "^13",
+    "@injectivelabs/sdk-ts": "^1.0.458",
     "@interchain-ui/react": "1.23.22",
     "next-compose-plugins": "^2.2.1",
     "next-plausible": "^3.7.1",
