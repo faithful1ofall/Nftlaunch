@@ -23,7 +23,7 @@ const ProjectItems = () => {
   console.log("Live update:", updatedData);
      //     setData(updatedData.data);
     //     setLoading(false);
-/});
+//});
     };
 
     fetchData();
