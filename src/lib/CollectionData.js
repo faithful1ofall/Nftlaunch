@@ -1,9 +1,64 @@
-//import { getContract, readContract } from "thirdweb";
-//import { client } from "./client";
-//import { sonicTestnet } from "./Customchains";
-//import factoryabi from "./factoryabi.json";
-//import nftabi from "./nftabi.json";
+import { toBase64, fromBase64 } from "@injectivelabs/sdk-ts";
+import { ChainGrpcWasmApi } from "@injectivelabs/sdk-ts";
 
+
+
+
+export const chainGrpcWasmApi1 = new ChainGrpcWasmApi('testnet.sentry.chain.grpc.injective.network:443');
+
+
+
+
+
+const fetchAllCollections = async () => {
+  try {
+    const collectionArray: any = []; // Array to store collections
+    let start_after: string = '0'; // Pagination key
+
+    // Loop to fetch all collections
+    while (true) {
+      const response: any = await chainGrpcWasmApi1.fetchSmartContractState(
+        process.env.NEXT_PUBLIC_FACTORY,
+        toBase64({
+          get_all_collection: {
+            start_after: start_after,
+            limit: 30, // Fetch 30 collections at a time
+          },
+        })
+      );
+
+      if (response) {
+        const result = fromBase64(response.data);
+        console.log('coll data', response);
+
+        // Break the loop if no more collections are returned
+        if (result.contracts.length === 0) break;
+
+        // Add each collection to the array
+        result.contracts.forEach((contract_info: any) => {
+          collectionArray.push({
+            contract_address: contract_info.address,
+            minter: contract_info.minter,
+            logo_url: contract_info.logo_url,
+            name: contract_info.name,
+            symbol: contract_info.symbol,
+          });
+          start_after = contract_info.address; // Update pagination key
+        });
+      } else {
+        break; // Break the loop if no response
+      }
+    }
+
+    return collectionArray; // Return the fetched collections
+  } catch (error) {
+    console.log("Error fetching collections:", error);
+    return []; // Return an empty array on error
+  }
+};
+
+
+export default fetchAllCollections;
 
 // Function to fetch baseURI from a collection contract
 /*const fetchCollection = async (collectionAddress) => {
