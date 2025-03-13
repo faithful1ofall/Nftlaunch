@@ -4,7 +4,7 @@ import { ChainGrpcWasmApi } from "@injectivelabs/sdk-ts";
 
 
 
-export const chainGrpcWasmApi1 = new ChainGrpcWasmApi('testnet.sentry.chain.grpc.injective.network:443');
+const chainGrpcWasmApi1 = new ChainGrpcWasmApi('testnet.sentry.chain.grpc.injective.network:443');
 
 
 
