@@ -1,5 +1,4 @@
-import { toBase64, fromBase64 } from "@injectivelabs/sdk-ts";
-import { ChainGrpcWasmApi } from "@injectivelabs/sdk-ts";
+import { toBase64, fromBase64, ChainGrpcWasmApi } from "@injectivelabs/sdk-ts";
 
 
 
