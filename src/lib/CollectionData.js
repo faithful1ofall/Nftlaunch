@@ -61,7 +61,7 @@ const fetchCollection = async (collectionAddress) => {
     const response = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress,
       toBase64({
-        nft_info: {},
+        contract_info: {},
       })
     );
 
