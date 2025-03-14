@@ -79,13 +79,15 @@ const fetchCollection = async (collectionAddress) => {
    
     console.log('nft config', resultconfig);
     return {
-      baseURI: collectionAddress?.logo_url.startsWith("ipfs://")
-        ? collectionAddress?.logo_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
-        : collectionAddress?.logo_url,
+      baseURI: resultconfig?.base_url.startsWith("ipfs://")
+        ? resultconfig?.base_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+        : resultconfig?.base_url,
       basePrice: result?.basePrice,
+      logoUrl: result?.logo_url,
+      mintActive: resultconfig?.is_mint_active,
       name: result?.name,
-      totalSupplyLimit: result?.totalSupplyLimit,
-      totalSupply: result?.totalSupply,
+      totalSupplyLimit: resultconfig?.max_mint,
+      totalSupply: resultconfig?.total_supply,
       creator: collectionAddress?.minter,
       address: collectionAddress?.contract_address,
     };
