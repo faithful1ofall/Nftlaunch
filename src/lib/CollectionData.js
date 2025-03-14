@@ -33,8 +33,7 @@ const fetchAllCollections = async () => {
       if (!response || !response.data) break;
 
       const result = fromBase64(response.data);
-      console.log('get all collection', result);
-      if (result.contracts.length === 0) break;
+     if (result.contracts.length === 0) break;
 
       result.contracts.forEach((contract_info) => {
         collectionArray.push({
@@ -58,6 +57,7 @@ const fetchAllCollections = async () => {
 };
 
 const fetchCollection = async (collectionAddress) => {
+  console.log('get collection', collectionAddress);
   try {
     const response = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress.contract_address,
@@ -66,12 +66,17 @@ const fetchCollection = async (collectionAddress) => {
       })
     );
 
+    try{
     const responseconfig = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress.contract_address,
       toBase64({
         config: {},
       })
     );
+      } catch (error) {
+    console.error(`Error fetching config details for ${contract_address.contract_address}:`, error.message || error);
+    }
+      
 
     try{
     const responseactivemintphase = await chainGrpcWasmApi1.fetchSmartContractState(
