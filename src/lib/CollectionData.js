@@ -15,7 +15,7 @@ const fetchAllCollections = async () => {
 
   const collectionArray = [];
   let start_after = '0';
-  const MAX_ITERATIONS = 2;
+  const MAX_ITERATIONS = 1;
   let iterationCount = 0;
 
   try {
