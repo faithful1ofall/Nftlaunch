@@ -70,14 +70,14 @@ const fetchCollection = async (collectionAddress) => {
     const result = fromBase64(response.data);
     console.log('nft info', result);
     return {
-      baseURI: contract_address.logo_url.startsWith("ipfs://")
-        ? contract_address.logo_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
-        : contract_address.logo_url.baseURI,
-      basePrice: result.basePrice,
-      totalSupplyLimit: result.totalSupplyLimit,
-      totalSupply: result.totalSupply,
-      creator: contract_address.minter,
-      address: contract_address.contract_address,
+      baseURI: contract_address?.logo_url.startsWith("ipfs://")
+        ? contract_address?.logo_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+        : contract_address?.logo_url,
+      basePrice: result?.basePrice || "N/A",
+      totalSupplyLimit: result?.totalSupplyLimit || "N/A",
+      totalSupply: result?.totalSupply || "N/A",
+      creator: contract_address?.minter,
+      address: contract_address?.contract_address,
     };
   } catch (error) {
     console.error(`Error fetching collection details for ${contract_address.contract_address}:`, error.message || error);
@@ -87,33 +87,33 @@ const fetchCollection = async (collectionAddress) => {
 
 const fetchCollectionMetadata = async (collection) => {
   try {
-    const response = await fetch(`${collection.baseURI}metadata.json`);
-    const responsenft = await fetch(`${collection.baseURI}1.json`);
+  //  const response = await fetch(`${collection.baseURI}metadata.json`);
+ //   const responsenft = await fetch(`${collection.baseURI}1.json`);
 
-    const metadata = await response.json();
-    const metadatanft = await responsenft.json();
+ //   const metadata = await response.json();
+//    const metadatanft = await responsenft.json();
 
-    const image = metadatanft.image.startsWith("ipfs://")
-      ? metadatanft.image.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
-      : metadatanft.image;
+    const image = metadatanft?.image.startsWith("ipfs://")
+      ? metadatanft?.image.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+      : metadatanft?.image;
 
     const imagesrc = { src: image };
     const injiconsrc = { src: 'https://docs.injective.network/~gitbook/image?url=https%3A%2F%2F1906080330-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Forganizations%252FLzWvewxXUBLXQT4cTrrj%252Fsites%252Fsite_cKCsf%252Ficon%252FihvWVYq5lBANeNmdL3OG%252FInjective%2520Symbol%2520-%2520Main.png%3Falt%3Dmedia%26token%3Dbfc3984b-67ff-4563-a93b-390d9c6a720f&width=32&dpr=3&quality=100&sign=5fc24b15&sv=2' };
 
     return {
       thumb: imagesrc,
-      title: metadata.CollectionName,
-      price: collection.basePrice ? `${collection.basePrice}` : "N/A",
-      saleEnd: `${collection.totalSupplyLimit - collection.totalSupply}` || "N/A",
+      title: metadata?.name,
+      price: collection?.basePrice ? `${collection.basePrice}` : "N/A",
+      saleEnd: `${collection?.totalSupplyLimit - collection.totalSupply}` || "N/A",
       coinIcon: injiconsrc,
-      address: collection.address,
+      address: collection?.address,
       projectDetails: [
-        { title: "Current Mints", text: collection.totalSupply ? collection.totalSupply.toString() : "N/A" },
-        { title: "Max Mints", text: collection.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A" },
-        { title: "Targeted Raise", text: `${collection.totalSupplyLimit * collection.basePrice}` || "N/A" },
-        { title: "Access Type", text: metadata.accessType || "Public" },
+        { title: "Current Mints", text: collection?.totalSupply ? collection.totalSupply.toString() : "N/A" },
+        { title: "Max Mints", text: collection?.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A" },
+        { title: "Targeted Raise", text: `${collection?.totalSupplyLimit * collection.basePrice}` || "N/A" },
+        { title: "Access Type", text: metadata?.accessType || "Public" },
       ],
-      socialLinks: metadata.socialLinks || [],
+      socialLinks: metadata?.socialLinks || [],
     };
   } catch (error) {
     console.error(`Error fetching metadata for ${collection.address}:`, error.message || error);
