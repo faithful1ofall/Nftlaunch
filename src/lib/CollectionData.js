@@ -59,7 +59,7 @@ const fetchAllCollections = async () => {
 const fetchCollection = async (collectionAddress) => {
   try {
     const response = await chainGrpcWasmApi1.fetchSmartContractState(
-      collectionAddress,
+      collectionAddress.contract_address,
       toBase64({
         contract_info: {},
       })
@@ -70,17 +70,17 @@ const fetchCollection = async (collectionAddress) => {
     const result = fromBase64(response.data);
     console.log('nft info', result);
     return {
-      baseURI: result.baseURI.startsWith("ipfs://")
-        ? result.baseURI.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
-        : result.baseURI,
+      baseURI: contract_address.logo_url.startsWith("ipfs://")
+        ? contract_address.logo_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+        : contract_address.logo_url.baseURI,
       basePrice: result.basePrice,
       totalSupplyLimit: result.totalSupplyLimit,
       totalSupply: result.totalSupply,
-      creator: result.creator,
-      address: collectionAddress,
+      creator: contract_address.minter,
+      address: contract_address.contract_address,
     };
   } catch (error) {
-    console.error(`Error fetching collection details for ${collectionAddress}:`, error.message || error);
+    console.error(`Error fetching collection details for ${contract_address.contract_address}:`, error.message || error);
     return null;
   }
 };
@@ -98,14 +98,14 @@ const fetchCollectionMetadata = async (collection) => {
       : metadatanft.image;
 
     const imagesrc = { src: image };
-    const soniciconsrc = { src: 'https://s2.coinmarketcap.com/static/img/coins/64x64/32684.png' };
+    const injiconsrc = { src: 'https://docs.injective.network/~gitbook/image?url=https%3A%2F%2F1906080330-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Forganizations%252FLzWvewxXUBLXQT4cTrrj%252Fsites%252Fsite_cKCsf%252Ficon%252FihvWVYq5lBANeNmdL3OG%252FInjective%2520Symbol%2520-%2520Main.png%3Falt%3Dmedia%26token%3Dbfc3984b-67ff-4563-a93b-390d9c6a720f&width=32&dpr=3&quality=100&sign=5fc24b15&sv=2' };
 
     return {
       thumb: imagesrc,
       title: metadata.CollectionName,
       price: collection.basePrice ? `${collection.basePrice}` : "N/A",
       saleEnd: `${collection.totalSupplyLimit - collection.totalSupply}` || "N/A",
-      coinIcon: soniciconsrc,
+      coinIcon: injiconsrc,
       address: collection.address,
       projectDetails: [
         { title: "Current Mints", text: collection.totalSupply ? collection.totalSupply.toString() : "N/A" },
@@ -127,7 +127,7 @@ const loadNFTCollections = async (onUpdate) => {
     const projects = [];
 
     for (const collection of collections) {
-      const collectionDetails = await fetchCollection(collection.contract_address);
+      const collectionDetails = await fetchCollection(collection);
       if (collectionDetails) {
         const collectionMetadata = await fetchCollectionMetadata(collectionDetails);
         if (collectionMetadata) {
