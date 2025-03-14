@@ -120,7 +120,7 @@ const fetchCollection = async (collectionAddress) => {
       address: collectionAddress?.contract_address,
     };
   } catch (error) {
-    console.error(`Error fetching collection details for ${contract_address.contract_address}:`, error.message || error);
+    console.error(`Error fetching collection details for ${collectionAddress.contract_address}:`, error.message || error);
     return null;
   }
 };
