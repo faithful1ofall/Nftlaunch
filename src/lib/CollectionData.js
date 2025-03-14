@@ -61,13 +61,14 @@ const fetchCollection = async (collectionAddress) => {
     const response = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress,
       toBase64({
-        get_collection_details: {},
+        nft_info: {},
       })
     );
 
     if (!response || !response.data) return null;
 
     const result = fromBase64(response.data);
+    console.log('nft info', response);
     return {
       baseURI: result.baseURI.startsWith("ipfs://")
         ? result.baseURI.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
