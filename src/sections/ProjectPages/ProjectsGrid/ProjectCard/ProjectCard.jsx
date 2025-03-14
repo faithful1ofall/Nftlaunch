@@ -31,7 +31,7 @@ const mintnft = async () => {
     contract: contractAddress,
     msg: {
       mint_active: {
-        is_active: is_active
+        is_active: true
       }
     },
   });
