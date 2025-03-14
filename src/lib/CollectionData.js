@@ -76,12 +76,7 @@ const fetchCollection = async (collectionAddress) => {
       })
     );
     
-    const responseactivemintphase = await chainGrpcWasmApi1.fetchSmartContractState(
-      collectionAddress.contract_address,
-      toBase64({
-        active_mint_phase: {},
-      })
-    );
+    
     
     
     const responsemintphase = await chainGrpcWasmApi1.fetchSmartContractState(
@@ -97,12 +92,9 @@ const fetchCollection = async (collectionAddress) => {
 
     const result = fromBase64(response.data);
     const resultconfig = fromBase64(responseconfig.data);
-   const resultactivemintphase = fromBase64(responseactivemintphase.data);
-   const resultmintphase = fromBase64(responsemintphase.data);
+    const resultmintphase = fromBase64(responsemintphase.data);
    
     console.log('nft config', resultconfig);
-
-    console.log('nft resultactivemintphase', resultactivemintphase);
 
     console.log('nft resultmintphase', resultmintphase);
     
