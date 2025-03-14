@@ -82,7 +82,10 @@ const fetchCollection = async (collectionAddress) => {
     const responsemintphase = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress.contract_address,
       toBase64({
-        mint_phase: {},
+        mint_phase: {
+          start_after: '0',
+          limit: 30,
+        },
       })
     );
       
