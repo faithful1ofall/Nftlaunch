@@ -23,12 +23,10 @@ const mintnft = async () => {
   setLoading(true); 
 
   try {
-      const contractAddress = process.env.NEXT_PUBLIC_FACTORY; // Replace with your deployed contract address
-
-  
+      
     const msg = new MsgExecuteContract({
     sender: recentWallet.account.address,
-    contract: contractAddress,
+    contract: address,
     msg: {
       mint_active: {
         is_active: true
