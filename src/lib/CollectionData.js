@@ -9,6 +9,161 @@ const chainGrpcWasmApi1 = new ChainGrpcWasmApi(TEST_ENDPOINTS.grpc);
 
 
 const fetchAllCollections = async () => {
+  if (!process.env.NEXT_PUBLIC_FACTORY) {
+    throw new Error("NEXT_PUBLIC_FACTORY environment variable is not defined");
+  }
+
+  const collectionArray = [];
+  let start_after = '0';
+  const MAX_ITERATIONS = 100;
+  let iterationCount = 0;
+
+  try {
+    while (iterationCount < MAX_ITERATIONS) {
+      const response = await chainGrpcWasmApi1.fetchSmartContractState(
+        process.env.NEXT_PUBLIC_FACTORY,
+        toBase64({
+          get_all_collection: {
+            start_after: start_after,
+            limit: 30,
+          },
+        })
+      );
+
+      if (!response || !response.data) break;
+
+      const result = fromBase64(response.data);
+      if (result.contracts.length === 0) break;
+
+      result.contracts.forEach((contract_info) => {
+        collectionArray.push({
+          contract_address: contract_info.address,
+          minter: contract_info.minter,
+          logo_url: contract_info.logo_url,
+          name: contract_info.name,
+          symbol: contract_info.symbol,
+        });
+        start_after = contract_info.address;
+      });
+
+      iterationCount++;
+    }
+
+    return collectionArray;
+  } catch (error) {
+    console.log("Error fetching collections:", error.message || error);
+    return [];
+  }
+};
+
+const fetchCollection = async (collectionAddress) => {
+  try {
+    const response = await chainGrpcWasmApi1.fetchSmartContractState(
+      collectionAddress,
+      toBase64({
+        get_collection_details: {},
+      })
+    );
+
+    if (!response || !response.data) return null;
+
+    const result = fromBase64(response.data);
+    return {
+      baseURI: result.baseURI.startsWith("ipfs://")
+        ? result.baseURI.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+        : result.baseURI,
+      basePrice: result.basePrice,
+      totalSupplyLimit: result.totalSupplyLimit,
+      totalSupply: result.totalSupply,
+      creator: result.creator,
+      address: collectionAddress,
+    };
+  } catch (error) {
+    console.error(`Error fetching collection details for ${collectionAddress}:`, error.message || error);
+    return null;
+  }
+};
+
+const fetchCollectionMetadata = async (collection) => {
+  try {
+    const response = await fetch(`${collection.baseURI}metadata.json`);
+    const responsenft = await fetch(`${collection.baseURI}1.json`);
+
+    const metadata = await response.json();
+    const metadatanft = await responsenft.json();
+
+    const image = metadatanft.image.startsWith("ipfs://")
+      ? metadatanft.image.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+      : metadatanft.image;
+
+    const imagesrc = { src: image };
+    const soniciconsrc = { src: 'https://s2.coinmarketcap.com/static/img/coins/64x64/32684.png' };
+
+    return {
+      thumb: imagesrc,
+      title: metadata.CollectionName,
+      price: collection.basePrice ? `${collection.basePrice}` : "N/A",
+      saleEnd: `${collection.totalSupplyLimit - collection.totalSupply}` || "N/A",
+      coinIcon: soniciconsrc,
+      address: collection.address,
+      projectDetails: [
+        { title: "Current Mints", text: collection.totalSupply ? collection.totalSupply.toString() : "N/A" },
+        { title: "Max Mints", text: collection.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A" },
+        { title: "Targeted Raise", text: `${collection.totalSupplyLimit * collection.basePrice}` || "N/A" },
+        { title: "Access Type", text: metadata.accessType || "Public" },
+      ],
+      socialLinks: metadata.socialLinks || [],
+    };
+  } catch (error) {
+    console.error(`Error fetching metadata for ${collection.address}:`, error.message || error);
+    return null;
+  }
+};
+
+const loadNFTCollections = async (onUpdate) => {
+  try {
+    const collections = await fetchAllCollections();
+    const projects = [];
+
+    for (const collection of collections) {
+      const collectionDetails = await fetchCollection(collection.contract_address);
+      if (collectionDetails) {
+        const collectionMetadata = await fetchCollectionMetadata(collectionDetails);
+        if (collectionMetadata) {
+          projects.push(collectionMetadata);
+
+          // Call the callback function with updated data in real-time
+          if (onUpdate) {
+            onUpdate({
+              data: [
+                {
+                  projectStatus: "On Going",
+                  projects: [...projects], // Send a copy of the array
+                },
+              ],
+            });
+          }
+        }
+      }
+    }
+
+    return {
+      data: [
+        {
+          projectStatus: "On Going",
+          projects,
+        },
+      ],
+    };
+  } catch (error) {
+    console.error("Error loading NFT collections:", error.message || error);
+    return { data: [] };
+  }
+};
+
+export default loadNFTCollections;
+
+/* const fetchAllCollections = async () => {
   try {
     const collectionArray = []; // Array to store collections
     let start_after = '0'; // Pagination key
@@ -56,7 +211,7 @@ const fetchAllCollections = async () => {
 };
 
 
-export default fetchAllCollections;
+export default fetchAllCollections;*/
 
 // Function to fetch baseURI from a collection contract
 /*const fetchCollection = async (collectionAddress) => {
