@@ -2,14 +2,8 @@ import { useState } from "react";
 import Link from "next/link";
 import CardHover from "@components/cardHover";
 import ProjectCardStyleWrapper from "./ProjectCard.style";
-/*import { getContract, prepareContractCall } from "thirdweb";
-import { client } from "src/lib/client";
-import { sonicTestnet } from "src/lib/Customchains";
-import nftabi from "src/lib/nftabi.json";
 import Button from "@components/button";
 
-import { useSendTransaction, useReadContract } from "thirdweb/react";
-*/
 const ProjectCard = ({
   thumb,
   title,
