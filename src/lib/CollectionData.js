@@ -15,7 +15,7 @@ const fetchAllCollections = async () => {
 
   const collectionArray = [];
   let start_after = '0';
-  const MAX_ITERATIONS = 100;
+  const MAX_ITERATIONS = 2;
   let iterationCount = 0;
 
   try {
@@ -33,6 +33,7 @@ const fetchAllCollections = async () => {
       if (!response || !response.data) break;
 
       const result = fromBase64(response.data);
+      console.log('get all collection', result);
       if (result.contracts.length === 0) break;
 
       result.contracts.forEach((contract_info) => {
