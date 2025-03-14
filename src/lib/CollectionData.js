@@ -70,14 +70,14 @@ const fetchCollection = async (collectionAddress) => {
     const result = fromBase64(response.data);
     console.log('nft info', result);
     return {
-      baseURI: contract_address?.logo_url.startsWith("ipfs://")
-        ? contract_address?.logo_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
-        : contract_address?.logo_url,
-      basePrice: result?.basePrice || "N/A",
-      totalSupplyLimit: result?.totalSupplyLimit || "N/A",
-      totalSupply: result?.totalSupply || "N/A",
-      creator: contract_address?.minter,
-      address: contract_address?.contract_address,
+      baseURI: collectionAddress?.logo_url.startsWith("ipfs://")
+        ? collectionAddress?.logo_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+        : collectionAddress?.logo_url,
+      basePrice: result?.basePrice,
+      totalSupplyLimit: result?.totalSupplyLimit,
+      totalSupply: result?.totalSupply,
+      creator: collectionAddress?.minter,
+      address: collectionAddress?.contract_address,
     };
   } catch (error) {
     console.error(`Error fetching collection details for ${contract_address.contract_address}:`, error.message || error);
