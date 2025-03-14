@@ -11,12 +11,12 @@ const chainGrpcWasmApi1 = new ChainGrpcWasmApi('testnet.sentry.chain.grpc.inject
 
 const fetchAllCollections = async () => {
   try {
-    const collectionArray: any = []; // Array to store collections
-    let start_after: string = '0'; // Pagination key
+    const collectionArray = []; // Array to store collections
+    let start_after = '0'; // Pagination key
 
     // Loop to fetch all collections
     while (true) {
-      const response: any = await chainGrpcWasmApi1.fetchSmartContractState(
+      const response = await chainGrpcWasmApi1.fetchSmartContractState(
         process.env.NEXT_PUBLIC_FACTORY,
         toBase64({
           get_all_collection: {
@@ -34,7 +34,7 @@ const fetchAllCollections = async () => {
         if (result.contracts.length === 0) break;
 
         // Add each collection to the array
-        result.contracts.forEach((contract_info: any) => {
+        result.contracts.forEach((contract_info) => {
           collectionArray.push({
             contract_address: contract_info.address,
             minter: contract_info.minter,
