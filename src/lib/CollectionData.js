@@ -68,7 +68,7 @@ const fetchCollection = async (collectionAddress) => {
     if (!response || !response.data) return null;
 
     const result = fromBase64(response.data);
-    console.log('nft info', response);
+    console.log('nft info', result);
     return {
       baseURI: result.baseURI.startsWith("ipfs://")
         ? result.baseURI.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
