@@ -74,6 +74,7 @@ const fetchCollection = async (collectionAddress) => {
         ? collectionAddress?.logo_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
         : collectionAddress?.logo_url,
       basePrice: result?.basePrice,
+      name: result?.name,
       totalSupplyLimit: result?.totalSupplyLimit,
       totalSupply: result?.totalSupply,
       creator: collectionAddress?.minter,
@@ -93,16 +94,16 @@ const fetchCollectionMetadata = async (collection) => {
  //   const metadata = await response.json();
 //    const metadatanft = await responsenft.json();
 
-    const image = metadatanft?.image.startsWith("ipfs://")
-      ? metadatanft?.image.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
-      : metadatanft?.image;
+    const image = collection?.baseURI.startsWith("ipfs://")
+      ? collection?.baseURI.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+      : collection?.baseURI;
 
     const imagesrc = { src: image };
     const injiconsrc = { src: 'https://docs.injective.network/~gitbook/image?url=https%3A%2F%2F1906080330-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Forganizations%252FLzWvewxXUBLXQT4cTrrj%252Fsites%252Fsite_cKCsf%252Ficon%252FihvWVYq5lBANeNmdL3OG%252FInjective%2520Symbol%2520-%2520Main.png%3Falt%3Dmedia%26token%3Dbfc3984b-67ff-4563-a93b-390d9c6a720f&width=32&dpr=3&quality=100&sign=5fc24b15&sv=2' };
 
     return {
       thumb: imagesrc,
-      title: metadata?.name,
+      title: collection?.name,
       price: collection?.basePrice ? `${collection.basePrice}` : "N/A",
       saleEnd: `${collection?.totalSupplyLimit - collection.totalSupply}` || "N/A",
       coinIcon: injiconsrc,
