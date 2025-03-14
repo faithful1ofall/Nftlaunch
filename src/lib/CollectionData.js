@@ -112,9 +112,9 @@ const fetchCollectionMetadata = async (collection) => {
         { title: "Current Mints", text: collection?.totalSupply ? collection.totalSupply.toString() : "N/A" },
         { title: "Max Mints", text: collection?.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A" },
         { title: "Targeted Raise", text: `${collection?.totalSupplyLimit * collection.basePrice}` || "N/A" },
-        { title: "Access Type", text: metadata?.accessType || "Public" },
+        { title: "Access Type", text: "Public" },
       ],
-      socialLinks: metadata?.socialLinks || [],
+      socialLinks: [],
     };
   } catch (error) {
     console.error(`Error fetching metadata for ${collection.address}:`, error.message || error);
