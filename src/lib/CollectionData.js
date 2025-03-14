@@ -58,6 +58,8 @@ const fetchAllCollections = async () => {
 
 const fetchCollection = async (collectionAddress) => {
   console.log('get collection', collectionAddress);
+  if(!collectionAddress) return null;
+  
   try {
     const response = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress.contract_address,
@@ -66,39 +68,30 @@ const fetchCollection = async (collectionAddress) => {
       })
     );
 
-    try{
+    
     const responseconfig = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress.contract_address,
       toBase64({
         config: {},
       })
     );
-      } catch (error) {
-    console.error(`Error fetching config details for ${contract_address.contract_address}:`, error.message || error);
-    }
-      
-
-    try{
+    
     const responseactivemintphase = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress.contract_address,
       toBase64({
         active_mint_phase: {},
       })
     );
-    } catch (error) {
-    console.error(`Error fetching active_mint_phase details for ${contract_address.contract_address}:`, error.message || error);
-    }
-
-    try{
+    
+    
     const responsemintphase = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress.contract_address,
       toBase64({
         mint_phase: {},
       })
     );
-      } catch (error) {
-    console.error(`Error fetching mint_phase details for ${contract_address.contract_address}:`, error.message || error);
-    }
+      
+    
 
     if (!response || !response.data) return null;
 
