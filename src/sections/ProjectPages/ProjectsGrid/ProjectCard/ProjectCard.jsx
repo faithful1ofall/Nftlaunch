@@ -19,7 +19,7 @@ const ProjectCard = ({
 const { recentWallet, broadcast, simulate } = useShuttle();
 
 
-const mintnft = () => {
+const mintnft = async () => {
   setLoading(true); 
 
   try {
