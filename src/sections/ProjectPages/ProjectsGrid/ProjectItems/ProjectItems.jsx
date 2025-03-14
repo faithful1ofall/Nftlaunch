@@ -10,7 +10,7 @@ import coinIcon2 from "@assets/images/project/previous-image2.png"
 import coinIcon3 from "@assets/images/project/previous-image3.png"
 import coinIcon4 from "@assets/images/project/chain.png"
 
-import fetchAllCollections from "../../../../lib/CollectionData";
+import loadNFTCollections from "../../../../lib/CollectionData";
 
 const ProjectItems = () => {
   const [data, setData] = useState([]);
@@ -18,12 +18,12 @@ const ProjectItems = () => {
 
  useEffect(() => {
     const fetchData = async () => {
-    //   loadNFTCollections((updatedData) => {
-    const updatedData =  await fetchAllCollections();
+       loadNFTCollections((updatedData) => {
+  //  const updatedData =  await fetchAllCollections();
   console.log("Live update:", updatedData);
-     //     setData(updatedData.data);
-    //     setLoading(false);
-//});
+         setData(updatedData.data);
+       setLoading(false);
+});
     };
 
     fetchData();
