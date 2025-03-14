@@ -72,12 +72,33 @@ const fetchCollection = async (collectionAddress) => {
       })
     );
 
+    const responseactivemintphase = await chainGrpcWasmApi1.fetchSmartContractState(
+      collectionAddress.contract_address,
+      toBase64({
+        active_mint_phase: {},
+      })
+    );
+
+    const responsemintphase = await chainGrpcWasmApi1.fetchSmartContractState(
+      collectionAddress.contract_address,
+      toBase64({
+        mint_phase: {},
+      })
+    );
+
     if (!response || !response.data) return null;
 
     const result = fromBase64(response.data);
     const resultconfig = fromBase64(responseconfig.data);
+   const resultactivemintphase = fromBase64(responseactivemintphase.data);
+   const resultmintphase = fromBase64(responsemintphase.data);
    
     console.log('nft config', resultconfig);
+
+    console.log('nft resultactivemintphase', resultactivemintphase);
+
+    console.log('nft resultmintphase', resultmintphase);
+    
     return {
       baseURI: resultconfig?.base_url.startsWith("ipfs://")
         ? resultconfig?.base_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
@@ -120,7 +141,7 @@ const fetchCollectionMetadata = async (collection) => {
       coinIcon: injiconsrc,
       address: collection?.address,
       projectDetails: [
-        { title: "Current Mints", text: collection?.totalSupply ? collection.totalSupply.toString() : "N/A" },
+        { title: "Current Mints", text: collection?.totalSupply ? collection.totalSupply.toString() : "0" },
         { title: "Max Mints", text: collection?.totalSupplyLimit ? collection.totalSupplyLimit.toString() : "N/A" },
         { title: "Targeted Raise", text: `${collection?.totalSupplyLimit * collection.basePrice}` || "N/A" },
         { title: "Access Type", text: "Public" },
