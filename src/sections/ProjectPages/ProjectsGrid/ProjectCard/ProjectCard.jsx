@@ -3,6 +3,7 @@ import Link from "next/link";
 import CardHover from "@components/cardHover";
 import ProjectCardStyleWrapper from "./ProjectCard.style";
 import Button from "@components/button";
+import { useShuttle, MsgExecuteContract } from "@delphi-labs/shuttle-react";
 
 const ProjectCard = ({
   thumb,
@@ -15,50 +16,53 @@ const ProjectCard = ({
   socialLinks,
 }) => {
   const [loading, setLoading] = useState(false);
-
-/*  const contract = getContract({
-address: address,
-chain: sonicTestnet,
-abi: nftabi,
-client,
-});
-
-   const { data, isLoading } = useReadContract({
-contract,
-method: "totalSupply"
-});
-
-  const basePrice = useReadContract({
-contract,
-method: "basePrice"
-});
-
-
-  const { mutate: sendTx, data: transactionResult } =
-useSendTransaction();*/
-
+const { recentWallet, broadcast, simulate } = useShuttle();
 
 
 const mintnft = () => {
   setLoading(true); 
 
- /* const transaction = prepareContractCall({
-    contract,
-    method: "mint",
-    params: [data + BigInt(1)],
-    value: basePrice.data,
+  try {
+      const contractAddress = process.env.NEXT_PUBLIC_FACTORY; // Replace with your deployed contract address
+
+  
+    const msg = new MsgExecuteContract({
+    sender: recentWallet.account.address,
+    contract: contractAddress,
+    msg: {
+      mint_active: {
+        is_active: is_active
+      }
+    },
   });
 
-  sendTx(transaction, {
-    onSuccess: () => {
-      alert("Transaction sent successfully!");
-      setLoading(false); // Stop loading on success
-    },
-    onError: (error) => {
-      alert(`Transaction failed: ${error.message}`);
-      setLoading(false); // Stop loading on error
-    },
-  });*/
+      const msgs = [msg];
+    console.log('msgs', msgs);
+
+      const response = await simulate({
+    messages: msgs,
+    wallet: recentWallet,
+  });
+   console.log('response for simulate', response);
+   const  feeest = response.fee?.amount[0];
+   const  gasLimit = response.fee?.gas;
+
+
+      const result = await broadcast({
+                wallet: recentWallet,
+                messages: msgs,
+                feeAmount: feeest?.amount,
+                gasLimit: gasLimit,
+            });
+
+      console.log("Transaction successful:", result);
+      alert("Smart contract executed successfully!");
+      setLoading(false);
+    } catch (error) {
+      console.error("Execution failed:", error);
+      alert("Transaction failed!");
+      setLoading(false);
+  }
 };
 
   
