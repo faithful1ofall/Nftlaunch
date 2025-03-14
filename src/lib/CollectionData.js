@@ -72,19 +72,27 @@ const fetchCollection = async (collectionAddress) => {
       })
     );
 
+    try{
     const responseactivemintphase = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress.contract_address,
       toBase64({
         active_mint_phase: {},
       })
     );
+    } catch (error) {
+    console.error(`Error fetching active_mint_phase details for ${contract_address.contract_address}:`, error.message || error);
+    }
 
+    try{
     const responsemintphase = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress.contract_address,
       toBase64({
         mint_phase: {},
       })
     );
+      } catch (error) {
+    console.error(`Error fetching mint_phase details for ${contract_address.contract_address}:`, error.message || error);
+    }
 
     if (!response || !response.data) return null;
 
