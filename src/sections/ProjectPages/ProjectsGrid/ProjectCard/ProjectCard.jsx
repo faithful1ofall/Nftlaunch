@@ -72,7 +72,7 @@ const mintnft = async () => {
     funds: [
       {
         denom: 'inj',
-        amount: BigInt(1000).toFixed(),
+        amount: '10000000000'
       }
     ]
   });
