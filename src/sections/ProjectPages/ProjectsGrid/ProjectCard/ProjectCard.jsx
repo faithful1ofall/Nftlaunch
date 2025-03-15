@@ -49,8 +49,8 @@ const mintnft = async () => {
   });*/
 
     const msg = new MsgExecuteContract({
-    sender: wallet.account.address,
-    contract: contract_address,
+    sender: recentWallet.account.address,
+    contract: address,
     msg: {
       mint_phase: {
         mint_phase: phase
