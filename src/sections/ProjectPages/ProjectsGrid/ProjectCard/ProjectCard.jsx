@@ -25,13 +25,15 @@ const mintnft = async () => {
   try {
     let phase = [];
 
+    
+
     if (phase.length == 0) {
                     let new_phase = {
                         mint_type: "1",
                         mint_name: "First",
                         price: "1",
-                        start_time: todayInSeconds(),
-                        end_time: todayInSeconds(),
+                        start_time: Math.floor(Date.now() / 1000),
+                        end_time: Math.floor(Date.now() / 1000),
                     }
                     phase.push(new_phase);
     }
