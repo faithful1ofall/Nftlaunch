@@ -23,13 +23,35 @@ const mintnft = async () => {
   setLoading(true); 
 
   try {
+    let phase = [];
+
+    if (phase.length == 0) {
+                    let new_phase = {
+                        mint_type: "1",
+                        mint_name: "First",
+                        price: "1",
+                        start_time: todayInSeconds(),
+                        end_time: todayInSeconds(),
+                    }
+                    phase.push(new_phase);
+    }
       
-    const msg = new MsgExecuteContract({
+/*    const msg = new MsgExecuteContract({
     sender: recentWallet.account.address,
     contract: address,
     msg: {
       mint_active: {
         is_active: true
+      }
+    },
+  });*/
+
+    const msg = new MsgExecuteContract({
+    sender: wallet.account.address,
+    contract: contract_address,
+    msg: {
+      mint_phase: {
+        mint_phase: phase
       }
     },
   });
