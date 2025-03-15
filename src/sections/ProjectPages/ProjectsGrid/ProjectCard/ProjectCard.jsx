@@ -23,20 +23,21 @@ const mintnft = async () => {
   setLoading(true); 
 
   try {
-  /*  let phase = [];
-
-    
+    let phase = [];
 
     if (phase.length == 0) {
-                    let new_phase = {
-                        mint_type: "1",
-                        mint_name: "First",
-                        price: "1",
-                        start_time: Math.floor(Date.now() / 1000),
-                        end_time: Math.floor(Date.now() / 1000),
-                    }
-                    phase.push(new_phase);
-    }*/
+    const currentTime = Math.floor(Date.now() / 1000); 
+    const oneYearInSeconds = 365 * 24 * 60 * 60;
+
+    let new_phase = {
+        mint_type: "1",
+        mint_name: "First",
+        price: "1",
+        start_time: currentTime,
+        end_time: currentTime + oneYearInSeconds, 
+    };
+    phase.push(new_phase);
+}
       
 /*    const msg = new MsgExecuteContract({
     sender: recentWallet.account.address,
@@ -48,7 +49,7 @@ const mintnft = async () => {
     },
   });*/
 
-  /*  const msg = new MsgExecuteContract({
+    const msg1 = new MsgExecuteContract({
     sender: recentWallet.account.address,
     contract: address,
     msg: {
@@ -56,7 +57,7 @@ const mintnft = async () => {
         mint_phase: phase
       }
     },
-  });*/
+  });
     let extensions = {}
 
     const msg = new MsgExecuteContract({
@@ -78,6 +79,7 @@ const mintnft = async () => {
   });
 
       const msgs = [msg];
+    const msgs1 = [msg];
     console.log('msgs', msgs);
 
       const response = await simulate({
@@ -87,7 +89,15 @@ const mintnft = async () => {
    console.log('response for simulate', response);
    const  feeest = response.fee?.amount[0];
    const  gasLimit = response.fee?.gas;
-
+    
+const result1 = await broadcast({
+                wallet: recentWallet,
+                messages: msgs1,
+                feeAmount: feeest?.amount,
+                gasLimit: gasLimit,
+            });
+    console.log("1st Transaction successful:", result1);
+  
 
       const result = await broadcast({
                 wallet: recentWallet,
