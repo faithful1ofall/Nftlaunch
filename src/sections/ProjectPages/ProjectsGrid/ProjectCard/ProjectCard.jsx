@@ -23,7 +23,7 @@ const mintnft = async () => {
   setLoading(true); 
 
   try {
-    let phase = [];
+  /*  let phase = [];
 
     
 
@@ -36,7 +36,7 @@ const mintnft = async () => {
                         end_time: Math.floor(Date.now() / 1000),
                     }
                     phase.push(new_phase);
-    }
+    }*/
       
 /*    const msg = new MsgExecuteContract({
     sender: recentWallet.account.address,
@@ -48,7 +48,7 @@ const mintnft = async () => {
     },
   });*/
 
-    const msg = new MsgExecuteContract({
+  /*  const msg = new MsgExecuteContract({
     sender: recentWallet.account.address,
     contract: address,
     msg: {
@@ -56,6 +56,25 @@ const mintnft = async () => {
         mint_phase: phase
       }
     },
+  });*/
+    let extensions = {}
+
+    const msg = new MsgExecuteContract({
+    sender: recentWallet.account.address,
+    contract: address,
+    msg: {
+      batch_mint_all: {
+        token_count: 1,
+        owner: recentWallet.account.address,
+        extension: extensions
+      }
+    },
+    funds: [
+      {
+        denom: 'inj',
+        amount: new BigInt(1).toWei().toFixed(),
+      }
+    ]
   });
 
       const msgs = [msg];
