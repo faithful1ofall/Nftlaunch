@@ -58,7 +58,7 @@ const mintnft = async () => {
       }
     },
   });
-    let extensions = {}
+  let extensions = {}
 
     const msg = new MsgExecuteContract({
     sender: recentWallet.account.address,
@@ -79,8 +79,9 @@ const mintnft = async () => {
   });
 
       const msgs = [msg];
-    const msgs1 = [msg];
+    const msgs1 = [msg1];
     console.log('msgs', msgs);
+    console.log('msgs', msgs1);
 
       const response = await simulate({
     messages: msgs,
