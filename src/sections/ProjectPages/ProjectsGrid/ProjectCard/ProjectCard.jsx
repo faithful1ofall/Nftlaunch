@@ -66,7 +66,7 @@ const mintnft = async () => {
 
     const msg1 = new MsgExecuteContract({
     sender: recentWallet.account.address,
-    contract: contract_address,
+    contract: address,
     msg: {
       batch_mint_all: {
         token_count: 1,
@@ -76,8 +76,8 @@ const mintnft = async () => {
     },
     funds: [
       {
-        denom: import.meta.env.VITE_PUBLIC_DEFAULT_DENOM,
-        amount: new BigNumberInBase(mint_price).toWei().toFixed(),
+        denom: 'inj',
+        amount: '10000000000'
       }
     ]
   });
