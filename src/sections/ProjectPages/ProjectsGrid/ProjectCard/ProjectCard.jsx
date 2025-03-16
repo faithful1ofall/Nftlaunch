@@ -69,7 +69,7 @@ const mintnft = async () => {
         token_id: ['1'],
         owner: [recentWallet.account.address],
         token_uri: ['test'],
-        extension: extension
+        extension: extensions
       }
     },
     funds: [
