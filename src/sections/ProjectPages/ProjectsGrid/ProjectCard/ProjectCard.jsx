@@ -58,7 +58,30 @@ const mintnft = async () => {
       }
     },
   });*/
+
+    
+    
   let extensions = [{}]
+
+
+    const msg1 = new MsgExecuteContract({
+    sender: recentWallet.account.address,
+    contract: contract_address,
+    msg: {
+      batch_mint_all: {
+        token_count: 1,
+        owner: recentWallet.account.address,
+        extension: extensions
+      }
+    },
+    funds: [
+      {
+        denom: import.meta.env.VITE_PUBLIC_DEFAULT_DENOM,
+        amount: new BigNumberInBase(mint_price).toWei().toFixed(),
+      }
+    ]
+  });
+    
     console.log('totsupply', projectDetails[0].text);
 
     const msg = new MsgExecuteContract({
@@ -81,9 +104,9 @@ const mintnft = async () => {
   });
 
       const msgs = [msg];
-  // const msgs1 = [msg1];
+     const msgs1 = [msg1];
     console.log('msgs', msgs);
- // console.log('msgs', msgs1);
+  console.log('msgs', msgs1);
 
       const response = await simulate({
     messages: msgs,
@@ -93,14 +116,14 @@ const mintnft = async () => {
    const  feeest = response.fee?.amount[0];
    const  gasLimit = response.fee?.gas;
     
-/*const result1 = await broadcast({
+const result1 = await broadcast({
                 wallet: recentWallet,
                 messages: msgs1,
                 feeAmount: feeest?.amount,
                 gasLimit: gasLimit,
             });
     console.log("1st Transaction successful:", result1);
-  */
+  
 
       const result = await broadcast({
                 wallet: recentWallet,
