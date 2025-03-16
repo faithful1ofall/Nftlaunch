@@ -58,7 +58,7 @@ const mintnft = async () => {
       }
     },
   });
-  let extensions = []
+  let extensions = [{}]
     console.log('totsupply', projectDetails[0].text);
 
     const msg = new MsgExecuteContract({
@@ -66,7 +66,7 @@ const mintnft = async () => {
     contract: address,
     msg: {
       batch_mint: {
-        token_id: ['0'],
+        token_id: ['1'],
         owner: [recentWallet.account.address],
         token_uri: ['test'],
         extension: extensions
