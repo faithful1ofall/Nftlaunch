@@ -62,6 +62,7 @@ const mintnft = async () => {
     
     
   let extensions = [{}]
+    let extensions1 = {}
 
 
     const msg1 = new MsgExecuteContract({
@@ -71,7 +72,7 @@ const mintnft = async () => {
       batch_mint_all: {
         token_count: 1,
         owner: recentWallet.account.address,
-        extension: extensions
+        extension: extensions1
       }
     },
     funds: [
