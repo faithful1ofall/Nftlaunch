@@ -66,7 +66,7 @@ const mintnft = async () => {
     contract: address,
     msg: {
       batch_mint: {
-        token_id: ['1'],
+        token_id: ['0'],
         owner: [recentWallet.account.address],
         token_uri: ['test'],
         extension: extensions
