@@ -205,21 +205,21 @@ for (const { type, attributes } of logs) {
 
                       const resultallmsg1 = await broadcast({
                             wallet: recentWallet,
-                            messages: msgactive,
+                            messages: configmsg,
                           feeAmount: feeestall?.amount,
                 gasLimit: gasLimitall,
                         });
 
                       const resultallmsg2 = await broadcast({
                             wallet: recentWallet,
-                            messages: configmsg,
+                            messages: phasemsg,
                           feeAmount: feeestall?.amount,
                 gasLimit: gasLimitall,
                         });
 
                       const resultallmsg3 = await broadcast({
                             wallet: recentWallet,
-                            messages: phasemsg,
+                            messages: msgactive,
                           feeAmount: feeestall?.amount,
                 gasLimit: gasLimitall,
                         });
