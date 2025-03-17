@@ -67,7 +67,7 @@ const mintnft = async () => {
                 base_url: 'test',
                 logo_url: 'testlogo',
                 mint_wallet: 'inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n',
-                royalty_wallet: ['inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n']
+                royalty_wallet: [{percent: 10, wallet: 'inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n'}]
     }
 
     const msg2 = new MsgExecuteContract({
@@ -132,8 +132,8 @@ const mintnft = async () => {
     ]
   });
 
-      const msgs = [msg1];
-     const msgs1 = [msg2];
+      const msgs = [msg2];
+     const msgs1 = [msg1];
     console.log('msgs', msgs);
   console.log('msgs', msgs1);
 
