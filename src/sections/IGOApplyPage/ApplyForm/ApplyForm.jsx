@@ -189,9 +189,18 @@ for (const { type, attributes } of logs) {
                     const allmsgs1 = [msgactive, configmsg, phasemsg];
 
                     try {
+                      const resall = await simulate({
+    messages: allmsgs1,
+    wallet: recentWallet,
+  });
+   console.log('response for simulate', resall);
+   const  feeestall = resall.fee?.amount[0];
+   const  gasLimitall = resall.fee?.gas;
                         const resultallmsg = await broadcast({
                             wallet: recentWallet,
-                            messages: allmsgs1
+                            messages: allmsgs1,
+                          feeAmount: feeestall?.amount,
+                gasLimit: gasLimitall,
                         });
                         console.log("Transaction successful:", resultallmsg);
                         alert("Smart contract executed successfully!");
