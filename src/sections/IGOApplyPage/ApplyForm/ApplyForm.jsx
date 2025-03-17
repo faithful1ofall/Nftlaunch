@@ -97,7 +97,7 @@ const ApplyForm = () => {
         name: config.name,
         symbol: config.symbol,
         minter: config.minter,
-        code_id: config.code_id,
+        code_id: Number(config.code_id),
         logo_url: config.logo_url
       }
     },
