@@ -94,17 +94,17 @@ const ApplyForm = () => {
     contract: contractAddress,
     msg: {
       create_contract: {
-        code_id: config.code_id,
-        logo_url: config.logo_url,
-        minter: config.minter,
         name: config.name,
-        symbol: config.symbol
+        symbol: config.symbol,
+        minter: config.minter,
+        code_id: config.code_id,
+        logo_url: config.logo_url
       }
     },
     funds: [
       {
         denom: 'inj',
-        amount: "1000000000000000000",
+        amount: "10000",
       }
     ]
   });
