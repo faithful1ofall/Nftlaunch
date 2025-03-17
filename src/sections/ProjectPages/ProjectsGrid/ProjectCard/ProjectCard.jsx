@@ -59,6 +59,34 @@ const mintnft = async () => {
     },
   });*/
 
+    let config = {
+                minter: 'inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n',
+                total_supply: "10",
+                max_mint: "10",
+                native_token: 'inj',
+                base_url: 'test',
+                logo_url: 'testlogo',
+                mint_wallet: 'inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n',
+                royalty_wallet: 'inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n'
+    }
+
+    const msg2 = new MsgExecuteContract({
+    sender: recentWallet.account.address,
+    contract: address,
+    msg: {
+      config: {
+        minter:config.minter,
+        total_supply: Number(config.total_supply),
+        max_mint: Number(config.max_mint),
+        native_token: config.native_token,
+        base_url: config.base_url,
+        logo_url: config.logo_url,
+        mint_wallet: config.mint_wallet,
+        royalty_wallet: config.royalty_wallet
+      }
+    },
+  });
+
     
     
   let extensions = [{}]
@@ -104,8 +132,8 @@ const mintnft = async () => {
     ]
   });
 
-      const msgs = [msg];
-     const msgs1 = [msg1];
+      const msgs = [msg1];
+     const msgs1 = [msg2];
     console.log('msgs', msgs);
   console.log('msgs', msgs1);
 
