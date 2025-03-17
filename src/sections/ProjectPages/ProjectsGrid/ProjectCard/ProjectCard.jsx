@@ -23,73 +23,7 @@ const mintnft = async () => {
   setLoading(true); 
 
   try {
-   /* let phase = [];
-
-    if (phase.length == 0) {
-    const currentTime = Math.floor(Date.now() / 1000); 
-    const oneYearInSeconds = 365 * 24 * 60 * 60;
-
-    let new_phase = {
-        mint_type: "1",
-        mint_name: "Public",
-        price: "1",
-        start_time: currentTime,
-        end_time: currentTime + oneYearInSeconds, 
-    };
-    phase.push(new_phase);
-}*/
-      
-/*    const msg = new MsgExecuteContract({
-    sender: recentWallet.account.address,
-    contract: address,
-    msg: {
-      mint_active: {
-        is_active: true
-      }
-    },
-  });*/
-
-  /*  const msg1 = new MsgExecuteContract({
-    sender: recentWallet.account.address,
-    contract: address,
-    msg: {
-      mint_phase: {
-        mint_phase: phase
-      }
-    },
-  });*/
-
-    let config = {
-                minter: 'inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n',
-                total_supply: "10",
-                max_mint: "10",
-                native_token: 'inj',
-                base_url: 'test',
-                logo_url: 'testlogo',
-                mint_wallet: 'inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n',
-                royalty_wallet: [{percent: 10, wallet: 'inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n'}]
-    }
-
-    const msg2 = new MsgExecuteContract({
-    sender: recentWallet.account.address,
-    contract: address,
-    msg: {
-      config: {
-        minter:config.minter,
-        total_supply: Number(config.total_supply),
-        max_mint: Number(config.max_mint),
-        native_token: config.native_token,
-        base_url: config.base_url,
-        logo_url: config.logo_url,
-        mint_wallet: config.mint_wallet,
-        royalty_wallet: config.royalty_wallet
-      }
-    },
-  });
-
-    
-    
-  let extensions = [{}]
+   
     let extensions1 = {}
 
 
@@ -106,62 +40,42 @@ const mintnft = async () => {
     funds: [
       {
         denom: 'inj',
-        amount: '1'
+        amount: price
       }
     ]
   });
     
     console.log('totsupply', projectDetails[0].text);
 
-    const msg = new MsgExecuteContract({
-    sender: recentWallet.account.address,
-    contract: address,
-    msg: {
-      batch_mint: {
-        token_id: ['1'],
-        owner: [recentWallet.account.address],
-        token_uri: ['test'],
-        extension: extensions
-      }
-    },
-    funds: [
-      {
-        denom: 'inj',
-        amount: '10000000000'
-      }
-    ]
-  });
+    
 
-      const msgs = [msg2];
+    
      const msgs1 = [msg1];
-    console.log('msgs', msgs);
+  
   console.log('msgs', msgs1);
 
-      const response = await simulate({
-    messages: msgs,
-    wallet: recentWallet,
-  });
-   console.log('response for simulate', response);
+      
+ /*  console.log('response for simulate', response);
    const  feeest = response.fee?.amount[0];
    const  gasLimit = response.fee?.gas;
-    
+    */
 const result1 = await broadcast({
                 wallet: recentWallet,
                 messages: msgs1,
-                feeAmount: feeest?.amount,
-                gasLimit: gasLimit,
+            //    feeAmount: feeest?.amount,
+          //      gasLimit: gasLimit,
             });
-    console.log("1st Transaction successful:", result1);
+    console.log(" Transaction successful:", result1);
   
 
-      const result = await broadcast({
+     /* const result = await broadcast({
                 wallet: recentWallet,
                 messages: msgs,
                 feeAmount: feeest?.amount,
                 gasLimit: gasLimit,
             });
 
-      console.log("Transaction successful:", result);
+      console.log("Transaction successful:", result);*/
       alert("Smart contract executed successfully!");
       setLoading(false);
     } catch (error) {
