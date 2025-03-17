@@ -134,7 +134,7 @@ const ApplyForm = () => {
 
       console.log("Transaction successful:", result);
 
-      const logs = result.response?.logs?.[0]?.events || [];
+      const logs = result.response?.events || [];
 
 for (const { type, attributes } of logs) {
     if (type === "wasm") {
