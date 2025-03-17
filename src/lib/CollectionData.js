@@ -102,7 +102,7 @@ const fetchCollection = async (collectionAddress) => {
     console.log('nft resultmintphase', resultmintphase);
     
     return {
-      mintphase: resultmintphase[0],
+      mintphase: resultmintphase.mint_phase[0],
       baseURI: resultconfig?.base_url.startsWith("ipfs://")
         ? resultconfig?.base_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
         : resultconfig?.base_url,
