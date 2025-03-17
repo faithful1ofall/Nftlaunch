@@ -136,88 +136,76 @@ const ApplyForm = () => {
 
       const logs = result.response?.logs?.[0]?.events || [];
 
-logs.some(({ type, attributes }) => {
+for (const { type, attributes } of logs) {
     if (type === "wasm") {
-        return attributes.some(({ key, value }) => {
+        for (const { key, value } of attributes) {
             if (key === "contract_addr") {
                 console.log("New Contract address", value);
-              const msgactive = new MsgExecuteContract({
-    sender: recentWallet.account.address,
-    contract: value,
-    msg: {
-      mint_active: {
-        is_active: true
-      }
-    },
-  });
-          const confignft = {
-                minter: recentWallet.account.address,
-                total_supply: count,
-                max_mint: count,
-                native_token: 'inj',
-                base_url: link,
-                logo_url: link,
-                mint_wallet: recentWallet.account.address,
-                royalty_wallet: [{percent: 10, wallet: recentWallet.account.address}]
-              }
 
-              const configmsg = new MsgExecuteContract({
-    sender: recentWallet.account.address,
-    contract: address,
-    msg: {
-      config: {
-        minter:confignft.minter,
-        total_supply: confignft.total_supply,
-        max_mint: confignft.max_mint,
-        native_token: confignft.native_token,
-        base_url: confignft.base_url,
-        logo_url: confignft.logo_url,
-        mint_wallet: confignft.mint_wallet,
-        royalty_wallet: confignft.royalty_wallet
-      }
-    },
-  });
+                const msgactive = new MsgExecuteContract({
+                    sender: recentWallet.account.address,
+                    contract: value,  // Use extracted contract address
+                    msg: {
+                        mint_active: { is_active: true }
+                    }
+                });
 
- let phase = [];
+                const confignft = {
+                    minter: recentWallet.account.address,
+                    total_supply: count,
+                    max_mint: count,
+                    native_token: 'inj',
+                    base_url: link,
+                    logo_url: link,
+                    mint_wallet: recentWallet.account.address,
+                    royalty_wallet: [{ percent: 10, wallet: recentWallet.account.address }]
+                };
 
-    if (phase.length == 0) {
-    const currentTime = Math.floor(Date.now() / 1000); 
-    const oneYearInSeconds = 365 * 24 * 60 * 60;
+                const configmsg = new MsgExecuteContract({
+                    sender: recentWallet.account.address,
+                    contract: value,  // Use extracted contract address
+                    msg: { config: confignft }
+                });
 
-    let new_phase = {
-        mint_type: "1",
-        mint_name: "Public",
-        price: "1",
-        start_time: currentTime,
-        end_time: currentTime + oneYearInSeconds, 
-    };
-    phase.push(new_phase);
+                let phase = [];
+                if (phase.length === 0) {
+                    const currentTime = Math.floor(Date.now() / 1000);
+                    const oneYearInSeconds = 365 * 24 * 60 * 60;
 
-      const phasemsg = new MsgExecuteContract({
-    sender: recentWallet.account.address,
-    contract: address,
-    msg: {
-      mint_phase: {
-        mint_phase: phase
-      }
-    },
-  });
+                    phase.push({
+                        mint_type: "1",
+                        mint_name: "Public",
+                        price: "1",
+                        start_time: currentTime,
+                        end_time: currentTime + oneYearInSeconds
+                    });
 
-      const allmsgs1 = [mmsgactive, configmsg, phasemsg];
+                    const phasemsg = new MsgExecuteContract({
+                        sender: recentWallet.account.address,
+                        contract: value,  // Use extracted contract address
+                        msg: { mint_phase: { mint_phase: phase } }
+                    });
 
-      const resultallmsg = await broadcast({
-                wallet: recentWallet,
-                messages: allmsgs1
-            });
-    console.log("Transaction successful:", resultallmsg);
-  
-                return true; // Stop iteration
+                    const allmsgs1 = [msgactive, configmsg, phasemsg];
+
+                    try {
+                        const resultallmsg = await broadcast({
+                            wallet: recentWallet,
+                            messages: allmsgs1
+                        });
+                        console.log("Transaction successful:", resultallmsg);
+                        alert("Smart contract executed successfully!");
+                    } catch (error) {
+                        console.error("Transaction failed:", error);
+                    }
+
+                    setLoading(false);
+                    return; // Stop execution after first match
+                }
             }
-            return false;
-        });
+        }
     }
-    return false;
-});
+}
       alert("Smart contract executed successfully!");
       setLoading(false);
     } catch (error) {
