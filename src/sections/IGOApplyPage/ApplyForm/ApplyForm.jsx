@@ -196,13 +196,35 @@ for (const { type, attributes } of logs) {
    console.log('response for simulate', resall);
    const  feeestall = resall.fee?.amount[0];
    const  gasLimitall = resall.fee?.gas;
-                        const resultallmsg = await broadcast({
+                  /*      const resultallmsg = await broadcast({
                             wallet: recentWallet,
                             messages: allmsgs1,
                           feeAmount: feeestall?.amount,
                 gasLimit: gasLimitall,
+                        });*/
+
+                      const resultallmsg1 = await broadcast({
+                            wallet: recentWallet,
+                            messages: msgactive,
+                          feeAmount: feeestall?.amount,
+                gasLimit: gasLimitall,
                         });
-                        console.log("Transaction successful:", resultallmsg);
+
+                      const resultallmsg2 = await broadcast({
+                            wallet: recentWallet,
+                            messages: configmsg,
+                          feeAmount: feeestall?.amount,
+                gasLimit: gasLimitall,
+                        });
+
+                      const resultallmsg3 = await broadcast({
+                            wallet: recentWallet,
+                            messages: phasemsg,
+                          feeAmount: feeestall?.amount,
+                gasLimit: gasLimitall,
+                        });
+                        
+                        console.log("Transaction successful:", resultallmsg1, resultallmsg2, resultallmsg3);
                         alert("Smart contract executed successfully!");
                     } catch (error) {
                         console.error("Transaction failed:", error);
