@@ -106,7 +106,7 @@ const mintnft = async () => {
     funds: [
       {
         denom: 'inj',
-        amount: '10000000000'
+        amount: '1'
       }
     ]
   });
