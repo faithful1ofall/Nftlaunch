@@ -54,16 +54,20 @@ const mintnft = async () => {
   
   console.log('msgs', msgs1);
 
-      
- /*  console.log('response for simulate', response);
+      const response = await simulate({
+     messages: msgs1,
+     wallet: recentWallet,
+   });
+  //  console.log('response for simulate', response);
+   console.log('response for simulate', response);
    const  feeest = response.fee?.amount[0];
    const  gasLimit = response.fee?.gas;
-    */
+    
 const result1 = await broadcast({
                 wallet: recentWallet,
                 messages: msgs1,
-            //    feeAmount: feeest?.amount,
-          //      gasLimit: gasLimit,
+                feeAmount: feeest?.amount,
+               gasLimit: gasLimit,
             });
     console.log(" Transaction successful:", result1);
   
