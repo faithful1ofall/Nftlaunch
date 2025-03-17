@@ -67,7 +67,7 @@ const mintnft = async () => {
                 base_url: 'test',
                 logo_url: 'testlogo',
                 mint_wallet: 'inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n',
-                royalty_wallet: 'inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n'
+                royalty_wallet: ['inj16ry7wekxvq38mjfcwrdpqzhgap9dnpgrpk296n']
     }
 
     const msg2 = new MsgExecuteContract({
