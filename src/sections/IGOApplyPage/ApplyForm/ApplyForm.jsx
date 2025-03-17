@@ -112,11 +112,6 @@ const ApplyForm = () => {
       console.log('msg', [msg]);
 
 
-   /*   const amount = {
-        denom: "inj",
-        amount: "1000000000000000000", // 1 INJ
-      };*/
-
       const msgs = [msg];
 
       const response = await simulate({
@@ -135,7 +130,94 @@ const ApplyForm = () => {
                 gasLimit: gasLimit,
             });
 
+      
+
       console.log("Transaction successful:", result);
+
+      const logs = result.response?.logs?.[0]?.events || [];
+
+logs.some(({ type, attributes }) => {
+    if (type === "wasm") {
+        return attributes.some(({ key, value }) => {
+            if (key === "contract_addr") {
+                console.log("New Contract address", value);
+              const msgactive = new MsgExecuteContract({
+    sender: recentWallet.account.address,
+    contract: value,
+    msg: {
+      mint_active: {
+        is_active: true
+      }
+    },
+  });
+          const confignft = {
+                minter: recentWallet.account.address,
+                total_supply: count,
+                max_mint: count,
+                native_token: 'inj',
+                base_url: link,
+                logo_url: link,
+                mint_wallet: recentWallet.account.address,
+                royalty_wallet: [{percent: 10, wallet: recentWallet.account.address}]
+              }
+
+              const configmsg = new MsgExecuteContract({
+    sender: recentWallet.account.address,
+    contract: address,
+    msg: {
+      config: {
+        minter:confignft.minter,
+        total_supply: confignft.total_supply,
+        max_mint: confignft.max_mint,
+        native_token: confignft.native_token,
+        base_url: confignft.base_url,
+        logo_url: confignft.logo_url,
+        mint_wallet: confignft.mint_wallet,
+        royalty_wallet: confignft.royalty_wallet
+      }
+    },
+  });
+
+ let phase = [];
+
+    if (phase.length == 0) {
+    const currentTime = Math.floor(Date.now() / 1000); 
+    const oneYearInSeconds = 365 * 24 * 60 * 60;
+
+    let new_phase = {
+        mint_type: "1",
+        mint_name: "Public",
+        price: "1",
+        start_time: currentTime,
+        end_time: currentTime + oneYearInSeconds, 
+    };
+    phase.push(new_phase);
+
+      const phasemsg = new MsgExecuteContract({
+    sender: recentWallet.account.address,
+    contract: address,
+    msg: {
+      mint_phase: {
+        mint_phase: phase
+      }
+    },
+  });
+
+      const allmsgs1 = [mmsgactive, configmsg, phasemsg];
+
+      const resultallmsg = await broadcast({
+                wallet: recentWallet,
+                messages: allmsgs1
+            });
+    console.log("Transaction successful:", resultallmsg);
+  
+                return true; // Stop iteration
+            }
+            return false;
+        });
+    }
+    return false;
+});
       alert("Smart contract executed successfully!");
       setLoading(false);
     } catch (error) {
