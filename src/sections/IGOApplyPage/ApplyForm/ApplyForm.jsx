@@ -947,7 +947,7 @@ const generateNFTs = async () => {
                 type="text" 
                 value={nftprice}
                 onChange={(e) => setNftprice(e.target.value)}
-                id="nftfile" placeholder="Enter nft price in S (Gwei) token" className="form-control" />
+                id="nftfile" placeholder="Enter nft price in INJ (uinj) token" className="form-control" />
             </div>
           </div>
         </div>
