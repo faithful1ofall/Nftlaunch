@@ -226,7 +226,7 @@ for (const { type, attributes } of logs) {
                 gasLimit: gasLimitall,
                         });
                         
-                        console.log("Transaction successful:", resultallmsg1);
+                        console.log("Transaction successful:");
                         alert("Smart contract executed successfully!");
                     } catch (error) {
                         console.error("Transaction failed:", error);
