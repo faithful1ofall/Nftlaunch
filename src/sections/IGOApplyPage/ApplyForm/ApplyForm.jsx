@@ -205,12 +205,12 @@ for (const { type, attributes } of logs) {
                 gasLimit: gasLimitall,
                         });*/
 
-                      const resultallmsg1 = await broadcast({
+                  /*    const resultallmsg1 = await broadcast({
                             wallet: recentWallet,
                             messages: [configmsg],
                           feeAmount: feeestall?.amount,
                 gasLimit: gasLimitall,
-                        });
+                        });*/
 
                       const resultallmsg2 = await broadcast({
                             wallet: recentWallet,
