@@ -152,8 +152,8 @@ for (const { type, attributes } of logs) {
 
                 const confignft = {
                     minter: recentWallet.account.address,
-                    total_supply: count,
-                    max_mint: count,
+                    total_supply: Number(count),
+                    max_mint: Number(count),
                     native_token: 'inj',
                     base_url: link,
                     logo_url: link,
