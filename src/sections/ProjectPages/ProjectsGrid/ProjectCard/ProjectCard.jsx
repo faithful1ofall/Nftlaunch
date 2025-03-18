@@ -102,7 +102,7 @@ const result1 = await broadcast({
               {title}
             </Link>
           </h4>
-          <div className="dsc">PRICE S(Gwei) = {price}</div>
+          <div className="dsc">PRICE INJ(uinj) = {price}</div>
         </div>
       </div>
       <div className="project-content">
@@ -125,7 +125,7 @@ const result1 = await broadcast({
         <div className="collection-address">
           <strong>Collection:</strong>{" "}
           <Link
-            href={`https://testnet.sonicscan.org/address/${address}`}
+            href={`https://testnet.explorer.injective.network/contract/${address}`}
             target="_blank"
             rel="noopener noreferrer"
           >
