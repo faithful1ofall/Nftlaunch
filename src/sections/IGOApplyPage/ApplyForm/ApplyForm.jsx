@@ -177,8 +177,7 @@ for (const { type, attributes } of logs) {
   }   
                     }
                 });
-              console.log('config msg', configmsg);
-
+              
                 let phase = [];
                 if (phase.length === 0) {
                     const currentTime = Math.floor(Date.now() / 1000);
@@ -200,7 +199,7 @@ for (const { type, attributes } of logs) {
 
                     const allmsgs1 = [msgactive, configmsg, phasemsg];
 
-                  
+                  console.log('allmsgs1 msg', allmsgs1);
 
                     try {
                       const resall = await simulate({
@@ -210,38 +209,16 @@ for (const { type, attributes } of logs) {
    console.log('response for simulate', resall);
    const  feeestall = resall.fee?.amount[0];
    const  gasLimitall = resall.fee?.gas;
-                  /*      const resultallmsg = await broadcast({
+                        const resultallmsg = await broadcast({
                             wallet: recentWallet,
                             messages: allmsgs1,
                           feeAmount: feeestall?.amount,
                 gasLimit: gasLimitall,
-                        });*/
+                        });
 
                 
 
-                      const resultallmsg2 = await broadcast({
-                            wallet: recentWallet,
-                            messages: [phasemsg, msgactive],
-                          feeAmount: feeestall?.amount,
-                gasLimit: gasLimitall,
-                        });
-
-                      console.log("Transaction successful:", resultallmsg2);
-                   
-
-                      const resultallmsg1 = await broadcast({
-                            wallet: recentWallet,
-                            messages: [configmsg],
-                          feeAmount: feeestall?.amount,
-                gasLimit: gasLimitall,
-                        });
-
-                 /*     const resultallmsg3 = await broadcast({
-                            wallet: recentWallet,
-                            messages: [msgactive],
-                          feeAmount: feeestall?.amount,
-                gasLimit: gasLimitall,
-                        });*/
+                      console.log('resultallmsg', resultallmsg);
                         
                              alert("Smart contract executed successfully!");
                     } catch (error) {
