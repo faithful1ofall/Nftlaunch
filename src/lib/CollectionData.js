@@ -101,7 +101,7 @@ const fetchCollection = async (collectionAddress) => {
     if (!response || !response.data) return null;
 
     const result = fromBase64(response.data);
-    const resultresponsenum = fromBase64(responsenum.data);
+    const resultresponsenum = fromBase64(responsenum);
     const resultconfig = fromBase64(responseconfig.data);
     const resultmintphase = fromBase64(responsemintphase.data);
    
