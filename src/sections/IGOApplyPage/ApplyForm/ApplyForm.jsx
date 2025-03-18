@@ -938,7 +938,7 @@ const generateNFTs = async () => {
         
         <div className="form_widgets">
           <div className="form-group">
-            <label htmlFor="nftprice">NFT Price S(Gwei)</label>
+            <label htmlFor="nftprice">NFT Price INJ(uinj)</label>
             <div className="input_with_icon">
               <div className="input_social_icon">
                 <FaLink />
