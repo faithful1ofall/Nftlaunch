@@ -164,7 +164,18 @@ for (const { type, attributes } of logs) {
                 const configmsg = new MsgExecuteContract({
                     sender: recentWallet.account.address,
                     contract: value,  // Use extracted contract address
-                    msg: { config: confignft }
+                    msg: {
+                      config: {
+    minter:confignft.minter,  
+    total_supply: confignft.total_supply,  
+    max_mint: confignft.max_mint,  
+    native_token: confignft.native_token,  
+    base_url: confignft.base_url,  
+    logo_url: confignft.logo_url,  
+    mint_wallet: confignft.mint_wallet,  
+    royalty_wallet: confignft.royalty_wallet  
+  }   
+                    }
                 });
 
                 let phase = [];
@@ -205,29 +216,33 @@ for (const { type, attributes } of logs) {
                 gasLimit: gasLimitall,
                         });*/
 
-                  /*    const resultallmsg1 = await broadcast({
+                
+
+                      const resultallmsg2 = await broadcast({
+                            wallet: recentWallet,
+                            messages: [phasemsg, msgactive],
+                          feeAmount: feeestall?.amount,
+                gasLimit: gasLimitall,
+                        });
+
+                      console.log("Transaction successful:", resultallmsg2);
+                   
+
+                      const resultallmsg1 = await broadcast({
                             wallet: recentWallet,
                             messages: [configmsg],
                           feeAmount: feeestall?.amount,
                 gasLimit: gasLimitall,
-                        });*/
-
-                      const resultallmsg2 = await broadcast({
-                            wallet: recentWallet,
-                            messages: [phasemsg],
-                          feeAmount: feeestall?.amount,
-                gasLimit: gasLimitall,
                         });
 
-                      const resultallmsg3 = await broadcast({
+                 /*     const resultallmsg3 = await broadcast({
                             wallet: recentWallet,
                             messages: [msgactive],
                           feeAmount: feeestall?.amount,
                 gasLimit: gasLimitall,
-                        });
+                        });*/
                         
-                        console.log("Transaction successful:");
-                        alert("Smart contract executed successfully!");
+                             alert("Smart contract executed successfully!");
                     } catch (error) {
                         console.error("Transaction failed:", error);
                     }
