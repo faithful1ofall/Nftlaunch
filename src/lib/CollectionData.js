@@ -101,7 +101,7 @@ const fetchCollection = async (collectionAddress) => {
     if (!response || !response.data) return null;
 
     const result = fromBase64(response.data);
-    const resultresponsenum = fromBase64(responsenum);
+    const resultresponsenum = fromBase64(responsenum.data);
     const resultconfig = fromBase64(responseconfig.data);
     const resultmintphase = fromBase64(responsemintphase.data);
    
@@ -110,7 +110,7 @@ const fetchCollection = async (collectionAddress) => {
     console.log('nft resultmintphase', resultmintphase);
     
     return {
-      numtokens: resultresponsenum, 
+      numtokens: resultresponsenum.count, 
       mintphase: resultmintphase.mint_phase[0],
       baseURI: resultconfig?.base_url.startsWith("ipfs://")
         ? resultconfig?.base_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
@@ -154,7 +154,7 @@ const fetchCollectionMetadata = async (collection) => {
       thumb: imagesrc,
       title: collection?.name,
       price: collection?.mintphase.price ? `${collection?.mintphase.price}` : "N/A",
-      saleEnd: `${collection?.totalSupplyLimit - collection.totalSupply}` || "N/A",
+      saleEnd: `${collection?.totalSupply - collection.numtokens}` || "N/A",
       coinIcon: injiconsrc,
       address: collection?.address,
       projectDetails: [
