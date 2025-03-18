@@ -64,6 +64,13 @@ const fetchCollection = async (collectionAddress) => {
     const response = await chainGrpcWasmApi1.fetchSmartContractState(
       collectionAddress.contract_address,
       toBase64({
+        contract_info: {}
+      })
+    );
+
+    const responsenum = await chainGrpcWasmApi1.fetchSmartContractState(
+      collectionAddress.contract_address,
+      toBase64({
         num_tokens: {}
       })
     );
@@ -94,6 +101,7 @@ const fetchCollection = async (collectionAddress) => {
     if (!response || !response.data) return null;
 
     const result = fromBase64(response.data);
+    const resultresponsenum = fromBase64(responsenum.data);
     const resultconfig = fromBase64(responseconfig.data);
     const resultmintphase = fromBase64(responsemintphase.data);
    
@@ -102,7 +110,7 @@ const fetchCollection = async (collectionAddress) => {
     console.log('nft resultmintphase', resultmintphase);
     
     return {
-      numtokens: result, 
+      numtokens: resultresponsenum, 
       mintphase: resultmintphase.mint_phase[0],
       baseURI: resultconfig?.base_url.startsWith("ipfs://")
         ? resultconfig?.base_url.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
@@ -135,7 +143,7 @@ const fetchCollectionMetadata = async (collection) => {
         metadatanft = await responsenft.json();
     }
 
-    console.log(metadatanft.image);
+    console.log(metadatanft.image, 'numtokems', collection?.numtokens);
 
     const image = metadatanft.image;
 
