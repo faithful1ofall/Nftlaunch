@@ -177,6 +177,7 @@ for (const { type, attributes } of logs) {
   }   
                     }
                 });
+              console.log('config msg', configmsg);
 
                 let phase = [];
                 if (phase.length === 0) {
@@ -186,7 +187,7 @@ for (const { type, attributes } of logs) {
                     phase.push({
                         mint_type: "1",
                         mint_name: "Public",
-                        price: "1",
+                        price: nftprice,
                         start_time: currentTime,
                         end_time: currentTime + oneYearInSeconds
                     });
