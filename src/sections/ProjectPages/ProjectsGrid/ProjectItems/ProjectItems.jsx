@@ -58,7 +58,7 @@ const ProjectItems = () => {
                   All Block Chain
                   <img src={nextArrowIcon.src} alt="icon" />
                   <ul className="sub-menu">
-                    <li><img src={'https://s2.coinmarketcap.com/static/img/coins/64x64/32684.png'} alt="icon" /> Sonic</li>
+                    <li><img src={'https://s2.coinmarketcap.com/static/img/coins/64x64/7226.png'} alt="icon" /> Injective</li>
                  </ul>
                 </button>
               </div>
