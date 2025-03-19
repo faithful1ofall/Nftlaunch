@@ -148,7 +148,7 @@ const fetchCollectionMetadata = async (collection) => {
     const image = metadatanft.image;
 
     const imagesrc = { src: image };
-    const injiconsrc = { src: 'https://docs.injective.network/~gitbook/image?url=https%3A%2F%2F1906080330-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Forganizations%252FLzWvewxXUBLXQT4cTrrj%252Fsites%252Fsite_cKCsf%252Ficon%252FihvWVYq5lBANeNmdL3OG%252FInjective%2520Symbol%2520-%2520Main.png%3Falt%3Dmedia%26token%3Dbfc3984b-67ff-4563-a93b-390d9c6a720f&width=32&dpr=3&quality=100&sign=5fc24b15&sv=2' };
+    const injiconsrc = { src: 'https://s2.coinmarketcap.com/static/img/coins/64x64/7226.png' };
 
     return {
       thumb: imagesrc,
